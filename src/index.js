@@ -4,10 +4,10 @@ import './style.css';
 import printMe from './print.js';
 import createTask from './createTask.js';
 
+
+
 createTask();
-
-
-
+printMe();
 
 
 

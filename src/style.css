@@ -6,3 +6,35 @@
     font-family: sans-serif;
     list-style-type: none;
   }
+
+#content {
+    max-width: 1400px;
+    margin: 0 auto;
+    border: solid 1px rgb(150, 150, 150);
+    padding: 20px;
+}
+
+.taskForm {
+    border: solid 1px rgb(150, 150, 150);
+}
+
+.taskForm label {
+    display: block;
+}
+
+.taskForm button {
+    display: block;
+    padding: 5px 30px;
+    cursor: pointer;
+}
+
+.todoList {
+    background: rgb(218, 234, 255);
+    padding: 20px;
+}
+
+.todoList ul{
+    background: rgb(225, 255, 218);
+    padding: 20px;
+    margin: 5px 0;
+}
