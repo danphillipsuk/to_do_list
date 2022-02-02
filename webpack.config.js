@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     mode: "development", // Remove for production
     entry:  {
+        // header: './src/header.js',
         index: './src/index.js',
         print: './src/print.js',
         form: './src/createTask.js',

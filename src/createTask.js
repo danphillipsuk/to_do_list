@@ -1,10 +1,9 @@
 export default function createTask() {
-    console.log("I'm createTask.js")
 
     // create new task form 
     const taskForm = document.createElement('div');
     taskForm.classList.add('taskForm');
-    taskForm.innerHTML = '<label for="taskTitle">Task</label><input name ="taskTitle" type="text"><label for="taskCatagory">Catagory</label><select name="taskCatagory"><option value="Home">Home</option><option value="work">Work</option></select><button id="submit">Add Task</button>';
+    taskForm.innerHTML = '<h2>Create a new task</h2><div class="formElement"><label for="taskTitle">Task</label><input name ="taskTitle" type="text"></div><div class="formElement"><label for="taskCatagory">Catagory</label><select name="taskCatagory"><option value="Home">Home</option><option value="work">Work</option></select></div><div class="formElement"><label for="dueDate">Due Date</label><input type="date" name="dueDate"></div><div class="formElement"><label for="taskTime">Time</label><input type="time" name="time"></div><button id="submit">Add Task</button><button id="more">Add more detail</button>';
     document.getElementById("content").appendChild(taskForm);
 
     //listen for task form submit
@@ -12,29 +11,40 @@ export default function createTask() {
 
 
     class taskClass {
-        constructor(title, catagory) {
-            this.title = title;
-            this.catagory = catagory;
+        constructor(title, catagory, dateDue, time) {
+            this.Title = title;
+            this.Catagory = catagory;
+            this.DateDue = dateDue;
+            this.Time = time;
         }
     } 
 
     const taskList = JSON.parse(localStorage.getItem("taskList"));
 
     if(!taskList) {
-        localStorage.setItem("taskList", JSON.stringify(taskList));
+        const taskListcreate = [];
+        localStorage.setItem("taskList", JSON.stringify(taskListcreate));
     } 
 
     //function to run on taskForm submit
     function newTask () {
         const title = document.querySelector("input[name='taskTitle']").value;
         const catagory = document.querySelector("select[name='taskCatagory']").value;
-    
-        // Create a new task object
-        const newAddition = new taskClass(title, catagory);
+        const dueDate = document.querySelector("input[name='dueDate']").value;
+        const time = document.querySelector("input[name='time']").value;
+        
+        if (title !== '' && dueDate !== '') {
+            // Create a new task object
+            const newAddition = new taskClass(title, catagory, dueDate, time);
 
-        // add new task to taskList array and set in localStorage
-        taskList.push(newAddition);
-        localStorage.setItem("taskList", JSON.stringify(taskList));
+            // add new task to taskList array and set in localStorage
+            taskList.push(newAddition);
+            localStorage.setItem("taskList", JSON.stringify(taskList));
+        }
+
+        return;
     }
+
+    
 
 };
