@@ -1,10 +1,12 @@
+// import todaysEvents from "./todaysEvents";
+
 export default function createTask() {
 
     // create new task form 
     const taskForm = document.createElement('div');
     taskForm.classList.add('taskForm');
     taskForm.innerHTML = '<h2>Create a new task</h2><div class="formElement"><label for="taskTitle">Task</label><input name ="taskTitle" type="text"></div><div class="formElement"><label for="taskCatagory">Catagory</label><select name="taskCatagory"><option value="Home">Home</option><option value="work">Work</option></select></div><div class="formElement"><label for="dueDate">Due Date</label><input type="date" name="dueDate"></div><div class="formElement"><label for="taskTime">Time</label><input type="time" name="time"></div><button id="submit">Add Task</button><button id="more">Add more detail</button>';
-    document.getElementById("content").appendChild(taskForm);
+    document.getElementById("mainContent").appendChild(taskForm);
 
     //listen for task form submit
     document.getElementById("submit").addEventListener("click", newTask);
@@ -19,13 +21,6 @@ export default function createTask() {
         }
     } 
 
-    const taskList = JSON.parse(localStorage.getItem("taskList"));
-
-    if(!taskList) {
-        const taskListcreate = [];
-        localStorage.setItem("taskList", JSON.stringify(taskListcreate));
-    } 
-
     //function to run on taskForm submit
     function newTask () {
         const title = document.querySelector("input[name='taskTitle']").value;
@@ -38,13 +33,15 @@ export default function createTask() {
             const newAddition = new taskClass(title, catagory, dueDate, time);
 
             // add new task to taskList array and set in localStorage
+            const taskList = JSON.parse(window.localStorage.getItem("taskList"));
             taskList.push(newAddition);
-            localStorage.setItem("taskList", JSON.stringify(taskList));
+            window.localStorage.setItem("taskList", JSON.stringify(taskList));
+
+    
         }
 
-        return;
-    }
 
+    }
     
 
 };

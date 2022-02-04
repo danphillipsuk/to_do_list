@@ -3,6 +3,13 @@ export default (function header() {
 
     const header = document.createElement('header');
     header.classList.add('header');
-    document.body.appendChild(header);
+    document.body.prepend(header);
+
+    const date = new Date();
+    const todaysDate = document.createElement('h2');
+    todaysDate.classList.add('todaysDate');
+    todaysDate.innerText = date;
+    document.querySelector('.header').prepend(todaysDate);
+
 })()
 
