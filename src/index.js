@@ -4,6 +4,7 @@ import './style.css';
 import header from './header.js';
 import sidebar from './sidebar.js';
 import todaysEvents from './todaysEvents';
+import nextSevenDays from './nextSevenDays.js';
 import createTask from './createTask.js';
 
 
@@ -25,5 +26,6 @@ test.id = "mainContent";
 document.getElementById("content").appendChild(test);
 
 createTask(); // Calls module to create task form and push new task to localStorage
+nextSevenDays();
 todaysEvents();
 

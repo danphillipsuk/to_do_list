@@ -1,8 +1,8 @@
+import { addDays } from 'date-fns';
 export default (function sidebar() {
 
     const sidebar = document.createElement('div');
     sidebar.classList.add('sidebar');
-    sidebar.innerHTML = "<h2>Sidebar</h2>";
     document.getElementById("content").appendChild(sidebar);
 
     // Get taskList array from localStorage
