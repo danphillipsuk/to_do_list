@@ -63,16 +63,15 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: flex-start;
-    gap: 15px;
+    gap: 5px;
 }
 
 .taskForm h2 {
     width: 100%;
+    margin-bottom: 10px;
 }
 
 .taskForm div{
-
 }
 
 .taskForm label {
@@ -87,6 +86,14 @@
     border: solid 1px rgb(201, 201, 201);
 }
 
+.taskTitle {
+    width: 70%;
+}
+
+.taskTitle input {
+    width: 100%;
+}
+
 .taskForm button {
     cursor: pointer;
     border: none;
@@ -97,13 +104,10 @@
 }
 
 #submit {
+    margin-top: 20px;;
     background: rgb(69, 170, 238);
     color: #FFF;
     font-weight: bold;
-}
-
-#more {
-    background: rgb(240, 113, 10);
 }
 
 .todoList, .todaysEvents {

@@ -36,7 +36,7 @@ export default function todaysEvents() {
             
             // create delete button for each task
             const deleteTask = document.createElement('button');
-            deleteTask.value = `${index}`;
+            deleteTask.value = `${item['id']}`;
             deleteTask.classList.add('deleteTask');
             deleteTask.innerText = "Delete";
             document.querySelector('.taskItemToday').append(deleteTask);
@@ -51,14 +51,23 @@ export default function todaysEvents() {
 
     display();
 
-        // Delete book object from array
-        document.querySelectorAll(".deleteTask").forEach(function(item, value) {
-            item.addEventListener("click", () => {
-                console.log("HEllo",value)
-                taskList.splice(value, 1);
-                localStorage.setItem("taskList", JSON.stringify(taskList));
+    document.querySelectorAll(".deleteTask").forEach(function(item) {
+
+        item.addEventListener("click", () => {
+    
+            const rmv = item.value;
+
+            taskList.forEach((items, index) => {
+
+                if (items.id === rmv) {
+                    console.log(index)
+                    taskList.splice(index, 1);
+                    localStorage.setItem("taskList", JSON.stringify(taskList));
+                }
+                
             })
         })
+    })
     
 }
 

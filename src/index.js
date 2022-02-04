@@ -8,7 +8,6 @@ import nextSevenDays from './nextSevenDays.js';
 import createTask from './createTask.js';
 
 
-
 // Get taskList from localStorage or create it if not found (first time visitor)
 let taskList= JSON.parse(localStorage.getItem('taskList'));
 if (taskList === null) {
@@ -28,4 +27,3 @@ document.getElementById("content").appendChild(test);
 createTask(); // Calls module to create task form and push new task to localStorage
 nextSevenDays();
 todaysEvents();
-

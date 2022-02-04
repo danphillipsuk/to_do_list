@@ -4,26 +4,36 @@ export default function nextSevenDays() {
     let taskList= JSON.parse(localStorage.getItem('taskList'));
 
     // Display Events/Tasks due today
-    function display() {
+    function displaySeven() {
 
         // create array of tasks due today 
         const today = taskList.filter(task => task.DateDue > new Date().toISOString().slice(0,10));
 
+        //arrang in reverse date order for display
+        const seven =  today.sort(function(a, b) {
+            if(a.DateDue > b.DateDue) {
+                return -1;
+            } else {
+                return 1;
+            }
+        })
+
+        console.log(seven)
+
         const todaysEvents = document.createElement('div');
         todaysEvents.classList.add('todaysEvents');
-        document.getElementById("mainContent").append(todaysEvents);
+        document.getElementById("mainContent").appendChild(todaysEvents);
             
-        today.forEach((item, index) => {
-
+        seven.forEach((items, index) => {
             const taskItemToday = document.createElement('ul');
             taskItemToday.classList.add('taskItemToday');
-            taskItemToday.classList.add('today');
+            taskItemToday.classList.add('seven');
             document.querySelector('.todaysEvents').prepend(taskItemToday);
 
-            for (let key in item) {
+            for (let key in items) {
 
                 const taskElement = document.createElement('li');
-                taskElement.innerText = `${[key]} ${item[key]}`;
+                taskElement.innerText = `${[key]} ${items[key]}`;
                 document.querySelector('.taskItemToday').appendChild(taskElement);
 
             }
@@ -36,7 +46,7 @@ export default function nextSevenDays() {
             
             // create delete button for each task
             const deleteTask = document.createElement('button');
-            deleteTask.value = `${index}`;
+            deleteTask.value = `${items['id']}`;
             deleteTask.classList.add('deleteTask');
             deleteTask.innerText = "Delete";
             document.querySelector('.taskItemToday').append(deleteTask);
@@ -49,16 +59,27 @@ export default function nextSevenDays() {
 
     };
 
-    display();
+    displaySeven();
 
         // Delete book object from array
-        document.querySelectorAll(".deleteTask").forEach(function(item, value) {
+        document.querySelectorAll(".deleteTask").forEach(function(item) {
+
             item.addEventListener("click", () => {
-                console.log("HEllo",value)
-                taskList.splice(value, 1);
-                localStorage.setItem("taskList", JSON.stringify(taskList));
+                
+                // console.log(item.value)
+                // console.log(taskList)
+                const rmv = item.value;
+
+                taskList.forEach((items, index) => {
+    
+                    if (items.id === rmv) {
+                        console.log(index)
+                        taskList.splice(index, 1);
+                        localStorage.setItem("taskList", JSON.stringify(taskList));
+                    }
+                    
+                })
             })
         })
     
 }
-
