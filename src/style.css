@@ -41,16 +41,19 @@
 }
 
 .sidebar p {
-    margin: 20px 0;
+    margin: 10px 0;
     font-size: .9em;
+    border: solid 1px;
+    padding: 10px;
+    border-radius: 25px;
 }
 
 .sidebar p span {
-    background:rgb(193, 240, 24);
+    background:rgb(235, 65, 22);
+    font-size: .7em;
     padding: 5px 10px;
-    border-radius: 10px;
-    font-weight: bold;
-    color:rgb(83, 94, 44)
+    border-radius: 15px;
+    color:rgb(255, 255, 255)
 }
 
 #mainContent {
@@ -110,22 +113,22 @@
     font-weight: bold;
 }
 
-.todoList, .todaysEvents {
-    border: solid 1px;
+.todaysEvents, .sevenDayEvents {
     padding: 20px;
 }
 
 .todaysEvents {
     background:rgb(235, 235, 235);
+    padding: 50px;
 }
 
-.todoList ul, .todaysEvents ul{
-    border: solid 1px;
+.sevenDayEvents ul, .todaysEvents ul{
     padding: 20px;
     margin: 5px 0;
+    background: rgb(250, 250, 250);
 }
 
-.todoList ul .modifyTask, .todoList ul .deleteTask, 
+.sevenDayEvents ul .modifyTask, .sevenDayEvents ul .deleteTask, 
 .todaysEvents .modifyTask, .todaysEvents .deleteTask {
     padding: 5px 20px;
     cursor: pointer;
@@ -133,18 +136,18 @@
     font-size: .8em;
 }
 
-.todoList ul .deleteTask,
+.sevenDayEvents ul .deleteTask,
 .todaysEvents .deleteTask {
     background:rgb(42, 42, 46);
     color:rgb(255, 255, 255);
 }
 
-.todoList ul .modifyTask,
+.sevenDayEvents ul .modifyTask,
 .todaysEvents .modifyTask {
     background:rgb(5, 214, 169);
     color:rgb(3, 29, 17);
 }
 
-.todoList .today {
+.sevenDayEvents .today {
     background: rgb(240, 113, 10);
 }

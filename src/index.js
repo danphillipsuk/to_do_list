@@ -25,5 +25,7 @@ test.id = "mainContent";
 document.getElementById("content").appendChild(test);
 
 createTask(); // Calls module to create task form and push new task to localStorage
-nextSevenDays();
+
 todaysEvents();
+
+nextSevenDays();

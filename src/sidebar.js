@@ -18,9 +18,16 @@ export default (function sidebar() {
     const SevenTasksNumber = document.createElement('p');
     const nextSevenTasksNumber = taskList.filter(task => task.DateDue > new Date().toISOString().slice(0,10));
     const SevenDayLength = nextSevenTasksNumber.length;
-    SevenTasksNumber.innerHTML = `<span>${SevenDayLength}</span> Tasks Due Within The Next Week`;
+    SevenTasksNumber.innerHTML = `<span>${SevenDayLength}</span> Tasks Due Within 7 Days`;
 
     document.querySelector('.sidebar').appendChild(SevenTasksNumber);
+
+    const expiredTasks = document.createElement('p');
+    const expiredTasksNumber = taskList.filter(task => task.DateDue < new Date().toISOString().slice(0,10));
+    const expiredLength = expiredTasksNumber.length;
+    expiredTasks.innerHTML = `<span>${expiredLength}</span> Expired Tasks`;
+
+    document.querySelector('.sidebar').appendChild(expiredTasks);
 
 
 
