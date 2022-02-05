@@ -16,7 +16,7 @@ if (taskList === null) {
     let taskList = JSON.parse(localStorage.getItem('taskList'));
 };
 
-console.log(taskList)
+
 
 
 // Create div for main content

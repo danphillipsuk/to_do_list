@@ -12,6 +12,12 @@ export default function todaysEvents() {
         const todaysEvents = document.createElement('div');
         todaysEvents.classList.add('todaysEvents');
         document.getElementById("mainContent").appendChild(todaysEvents);
+
+
+        
+
+
+
             
         today.forEach((item, index) => {
 
@@ -23,22 +29,32 @@ export default function todaysEvents() {
             for (let key in item) {
 
                 const taskElement = document.createElement('li');
-                taskElement.innerText = `${[key]} ${item[key]}`;
-                document.querySelector('.taskItemToday').appendChild(taskElement);
+                if ([key] != "id") {
+                    taskElement.classList.add(`${[key]}`);
+                    const taskTitle = document.createElement('span');
+                    taskTitle.innerText = `${[key]}`;
+                    if ([key] == 'DateDue') {
+                        taskElement.innerText = ``;
+                    } else {
 
+                    taskElement.innerText = `${item[key]}`;
+                    taskElement.prepend(taskTitle);
+                    }
+                    document.querySelector('.taskItemToday').appendChild(taskElement);
+                }
             }
 
             // create modify task button for each task
             const modifyTask = document.createElement('button');
             modifyTask.classList.add('modifyTask');
-            modifyTask.innerText = "Modify";
+            modifyTask.innerText = "EDIT";
             document.querySelector('.taskItemToday').append(modifyTask);
             
             // create delete button for each task
             const deleteTask = document.createElement('button');
             deleteTask.value = `${item['id']}`;
             deleteTask.classList.add('deleteTask');
-            deleteTask.innerText = "Delete";
+            deleteTask.innerText = "X";
             document.querySelector('.taskItemToday').append(deleteTask);
         
         });

@@ -23,6 +23,7 @@ export default function nextSevenDays() {
         document.getElementById("mainContent").appendChild(sevenDayEvents);
             
         seven.forEach((items) => {
+
             const sevenDayItem = document.createElement('ul');
             sevenDayItem.classList.add('sevenDay');
             document.querySelector('.sevenDayEvents').prepend(sevenDayItem);
@@ -31,7 +32,11 @@ export default function nextSevenDays() {
 
                 const taskElement = document.createElement('li');
                 if ([key] != "id") {
-                    taskElement.innerText = `${[key]} ${items[key]}`;
+                    taskElement.classList.add(`${[key]}`);
+                    const taskTitle = document.createElement('span');
+                    taskTitle.innerText = `${[key]}`;
+                    taskElement.innerText = `${items[key]}`;
+                    taskElement.prepend(taskTitle);
                     document.querySelector('.sevenDay').appendChild(taskElement);
                 }
             }
@@ -39,7 +44,7 @@ export default function nextSevenDays() {
             // create modify task button for each task
             const modifyTask = document.createElement('button');
             modifyTask.classList.add('modifyTask');
-            modifyTask.innerText = "Modify";
+            modifyTask.innerText = "EDIT";
             document.querySelector('.sevenDay').append(modifyTask);
             
             // create delete button for each task
@@ -47,7 +52,7 @@ export default function nextSevenDays() {
             const deleteTask = document.createElement('button');
             deleteTask.value = `${items['id']}`;
             deleteTask.classList.add('deleteTask');
-            deleteTask.innerText = "Delete";
+            deleteTask.innerText = "X";
             document.querySelector('.sevenDay').append(deleteTask);
             })();
         

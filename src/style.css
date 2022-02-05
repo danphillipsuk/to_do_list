@@ -119,35 +119,88 @@
 
 .todaysEvents {
     background:rgb(235, 235, 235);
-    padding: 50px;
 }
 
 .sevenDayEvents ul, .todaysEvents ul{
     padding: 20px;
     margin: 5px 0;
+    border-radius: 5px;
     background: rgb(250, 250, 250);
+    border: solid 2px rgb(250, 250, 250);
+    display: flex;
+    align-items: centre;
+    gap: 5px;
+}
+
+.todaysEvents ul:hover {
+    background: rgb(255, 255, 255);
+    border:solid 2px rgb(197, 197, 197);
+    transition: .8s;
+}
+.sevenDayEvents ul li span, .todaysEvents ul li span{
+    display: block;
+    font-size: .6em;
+    letter-spacing: .3em;
+    margin-bottom: 3px;
+    font-weight: bold;
 }
 
 .sevenDayEvents ul .modifyTask, .sevenDayEvents ul .deleteTask, 
 .todaysEvents .modifyTask, .todaysEvents .deleteTask {
-    padding: 5px 20px;
+
     cursor: pointer;
-    border: none;
     font-size: .8em;
 }
 
-.sevenDayEvents ul .deleteTask,
-.todaysEvents .deleteTask {
-    background:rgb(42, 42, 46);
+.deleteTask {
+    background:rgb(248, 63, 6);
     color:rgb(255, 255, 255);
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 3px;
+    border: solid 2px rgb(190, 55, 21);
 }
 
-.sevenDayEvents ul .modifyTask,
-.todaysEvents .modifyTask {
+.deleteTask:hover {
+    background:rgb(8, 202, 216);
+    transition: .5s;
+}
+
+.modifyTask {
+    border-radius: 3px;
+    border: solid 2px rgb(21, 190, 148);
     background:rgb(5, 214, 169);
     color:rgb(3, 29, 17);
+}
+
+.modifyTask:hover {
+    background:rgb(8, 202, 216);
+    transition: .5s;
 }
 
 .sevenDayEvents .today {
     background: rgb(240, 113, 10);
 }
+
+.Title {
+    width: 40%;
+}
+
+.Catagory {
+    width: 10%;
+}
+
+.DateDue {
+    width: 20%;
+}
+ .Time {
+    width: 10%;
+ }
+
+ .deleteTask {
+    width: 5%;
+ }
+
+ .modifyTask {
+     width: 10%;
+ }
