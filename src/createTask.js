@@ -1,12 +1,13 @@
-// import todaysEvents from "./todaysEvents";
+import todaysEvents from "./todaysEvents";
 
 export default function createTask() {
 
     // create new task form 
     const taskForm = document.createElement('div');
     taskForm.classList.add('taskForm');
-    taskForm.innerHTML = '<h2>Create a new task</h2><div class="formElement taskTitle"><label for="taskTitle">Task</label><input name ="taskTitle" type="text"></div><div class="formElement"><label for="taskCatagory">Catagory</label><select name="taskCatagory"><option value="Home">Home</option><option value="work">Work</option></select></div><div class="formElement"><label for="dueDate">Due Date</label><input type="date" name="dueDate"></div><div class="formElement"><label for="taskTime">Time</label><input type="time" name="time"></div><button id="submit">Add Task</button>';
-    document.getElementById("mainContent").appendChild(taskForm);
+    taskForm.innerHTML = '<h2>CREATE A NEW TASK</h2><div class="formElement taskTitle"><label for="taskTitle">Task</label><input name ="taskTitle" type="text"></div><div class="formElement"><label for="taskCatagory">Catagory</label><select name="taskCatagory"><option value="Home">Home</option><option value="work">Work</option></select></div><div class="formElement"><label for="dueDate">Due Date</label><input type="date" name="dueDate"></div><div class="formElement"><label for="taskTime">Time</label><input type="time" name="time"></div><button id="submit">Add Task</button>';
+
+    document.getElementById("content").prepend(taskForm);
 
     //listen for task form submit
     document.getElementById("submit").addEventListener("click", newTask);
@@ -30,8 +31,8 @@ export default function createTask() {
         const time = document.querySelector("input[name='time']").value;
         
         if (title !== '' && dueDate !== '') {
-            const id = title + Math.random();
-            console.log(id)
+            const id = Math.random();
+        
             // Create a new task object
             const newAddition = new taskClass(id, title, catagory, dueDate, time);
 
@@ -40,7 +41,11 @@ export default function createTask() {
             taskList.push(newAddition);
             window.localStorage.setItem("taskList", JSON.stringify(taskList));
 
-    
+            // const test = document.getElementById("mainContent");
+            // if (test.childNodes[1] !== undefined) {
+            //     test.removeChild(test.childNodes[1]);
+            //     todaysEvents("hello from create task");
+            // };
         }
 
 

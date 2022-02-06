@@ -3,13 +3,13 @@ export default function nextSevenDays() {
     // retrieve taskList array from localStorage
     let taskList= JSON.parse(localStorage.getItem('taskList'));
 
-    // Display Events/Tasks due today
+    // Display Events/Tasks due over next seven days
     function displaySeven() {
 
         // create array of tasks due today 
         const today = taskList.filter(task => task.DateDue > new Date().toISOString().slice(0,10));
 
-        //arrang in reverse date order for display
+        //arrange in reverse date order for display
         const seven =  today.sort(function(a, b) {
             if(a.DateDue > b.DateDue) {
                 return -1;
@@ -66,19 +66,19 @@ export default function nextSevenDays() {
 
     displaySeven();
 
-        // Delete task object from array
-        document.querySelectorAll(".deleteTask").forEach(function(item) {
-            item.addEventListener("click", () => {
-                const rmv = item.value;
-                taskList.forEach((items, index) => {
-                    if (items.id === rmv) {
-                        console.log(index)
-                        taskList.splice(index, 1);
-                        localStorage.setItem("taskList", JSON.stringify(taskList));
-                    }
-                })
-            })
-        })
+    // Remove previous view content, load seven day content, and disable eventlistener on seven day tab
+    (function() {
+        const test = document.getElementById("mainContent");
+        if (test.childNodes[2] !== undefined) {
+            test.removeChild(test.childNodes[2]);
+
+        };
+
+        const currentTab = document.querySelector('.sevenDayTab');
+        currentTab.style.pointerEvents = "none";
+        currentTab.classList.add("active");     
+    })();
+
     
 }
 

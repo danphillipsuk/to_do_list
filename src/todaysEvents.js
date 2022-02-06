@@ -1,89 +1,115 @@
-export default function todaysEvents() {
+export default function todaysEvents(test) {
 
     // retrieve taskList array from localStorage
     let taskList= JSON.parse(localStorage.getItem('taskList'));
 
+    let displayTasks;
+    let pageTitle;
+    if (test === 'seven') {
+        displayTasks = taskList.filter(task => task.DateDue > new Date().toISOString().slice(0,10));
+        const currentTab = document.querySelector('.sevenDayTab');
+        currentTab.style.pointerEvents = "none";
+        currentTab.classList.add("active");  
+
+        const todayTab = document.querySelector('.todayTab');
+        todayTab.style.pointerEvents = "auto";
+        todayTab.classList.remove("active");
+
+        pageTitle = "Next Seven Days";
+        
+
+    } else {
+        if (test === 'today')
+        displayTasks = taskList.filter(task => task.DateDue === new Date().toISOString().slice(0,10));
+        const currentTab = document.querySelector('.todayTab');
+        currentTab.style.pointerEvents = "none";
+        currentTab.classList.add("active");  
+
+        const todayTab = document.querySelector('.sevenDayTab');
+        todayTab.style.pointerEvents = "auto";
+        todayTab.classList.remove("active");
+
+        pageTitle = "Today's Tasks";
+
+    }
+
+
     // Display Events/Tasks due today
     function display() {
 
-        // create array of tasks due today 
-        const today = taskList.filter(task => task.DateDue === new Date().toISOString().slice(0,10));
-
         const todaysEvents = document.createElement('div');
-        todaysEvents.classList.add('todaysEvents');
-        document.getElementById("mainContent").appendChild(todaysEvents);
+        todaysEvents.id ='todaysEvents';
+        document.getElementById("mainContent").append(todaysEvents);
+    
+        displayTasks.forEach((item, index) => {
+
+            const taskItem = document.createElement('ul');
+            taskItem.classList.add('taskItem');
+            document.getElementById('todaysEvents').prepend(taskItem);
 
 
-        
+            const taskTitle = document.createElement('li');
+            taskTitle.classList.add('taskTitle');
+            taskTitle.innerText = `${item.Title}`;
 
+            const taskTitleCatagory = document.createElement('span');
+            taskTitleCatagory.innerText = `${item.Catagory}`;
+            taskTitle.prepend(taskTitleCatagory);
 
+            document.querySelector('.taskItem').appendChild(taskTitle);
 
-            
-        today.forEach((item, index) => {
-
-            const taskItemToday = document.createElement('ul');
-            taskItemToday.classList.add('taskItemToday');
-            taskItemToday.classList.add('today');
-            document.querySelector('.todaysEvents').prepend(taskItemToday);
-
-            for (let key in item) {
-
-                const taskElement = document.createElement('li');
-                if ([key] != "id") {
-                    taskElement.classList.add(`${[key]}`);
-                    const taskTitle = document.createElement('span');
-                    taskTitle.innerText = `${[key]}`;
-                    if ([key] == 'DateDue') {
-                        taskElement.innerText = ``;
-                    } else {
-
-                    taskElement.innerText = `${item[key]}`;
-                    taskElement.prepend(taskTitle);
-                    }
-                    document.querySelector('.taskItemToday').appendChild(taskElement);
-                }
-            }
 
             // create modify task button for each task
             const modifyTask = document.createElement('button');
+            modifyTask.value = `${item['id']}`;
             modifyTask.classList.add('modifyTask');
             modifyTask.innerText = "EDIT";
-            document.querySelector('.taskItemToday').append(modifyTask);
+            document.querySelector('.taskItem').append(modifyTask);
             
             // create delete button for each task
             const deleteTask = document.createElement('button');
             deleteTask.value = `${item['id']}`;
             deleteTask.classList.add('deleteTask');
             deleteTask.innerText = "X";
-            document.querySelector('.taskItemToday').append(deleteTask);
+            document.querySelector('.taskItem').append(deleteTask);
         
         });
 
         const futureHeadline = document.createElement('h3');
-        futureHeadline.innerText = "Today's Tasks";
-        document.querySelector('.todaysEvents').prepend(futureHeadline);
+        futureHeadline.innerText = pageTitle;
+        document.getElementById('todaysEvents').prepend(futureHeadline);
 
     };
 
     display();
 
+
+    // Delete task from taskList array
     document.querySelectorAll(".deleteTask").forEach(function(item) {
 
-        item.addEventListener("click", () => {
+        item.addEventListener("click", (item) => {
+            console.log(item)
     
             const rmv = item.value;
 
-            taskList.forEach((items, index) => {
-
-                if (items.id === rmv) {
-                    console.log(index)
-                    taskList.splice(index, 1);
-                    localStorage.setItem("taskList", JSON.stringify(taskList));
+            const fuck = taskList.findIndex((obj) => {
+                if(obj.id == rmv) {
+                    return true
                 }
-                
+                return false;
             })
+
+            taskList.splice(fuck, 1);
+            localStorage.setItem("taskList", JSON.stringify(taskList));
+            const refresh = document.getElementById("mainContent");
+            refresh.removeChild(refresh.childNodes[2]);
+            display();
+            
         })
+        
+
     })
+    
     
 }
 
