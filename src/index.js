@@ -23,11 +23,15 @@ todaysEvents('today');
 
 
 document.querySelector('.todayTab').addEventListener('click', function() {
+    const refresh = document.getElementById("mainContent");
+    refresh.removeChild(refresh.childNodes[2]);
     todaysEvents('today')
 });
 
 
 document.querySelector('.sevenDayTab').addEventListener('click', function() {
+    const refresh = document.getElementById("mainContent");
+    refresh.removeChild(refresh.childNodes[2]);
     todaysEvents('seven')
 });
 
