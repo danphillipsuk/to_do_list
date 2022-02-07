@@ -1,5 +1,10 @@
 import todaysEvents from "./todaysEvents.js";
-export default function deleteTask(unique_id, taskList) {
+import config from './config.js';
+
+// Delete task from main taskList array
+const deleteTask = (unique_id, taskList) => {
+  // get global variabels from config.js
+  const mainContent = config.mainContent();
 
   // find index of item to delete in master array (taskList)
   const taskListIndex = taskList.findIndex((obj) => {
@@ -16,8 +21,16 @@ export default function deleteTask(unique_id, taskList) {
   localStorage.setItem("taskList", JSON.stringify(taskList));
 
   // remove expired array from display and refresh
-  const refresh = document.getElementById("mainContent");
-  refresh.removeChild(refresh.childNodes[2]);
+  mainContent.removeChild(mainContent.childNodes[3]);
+
   todaysEvents('today');
 
-}
+};
+
+// Modify task in main taskList array
+const editTask = (unique_id, taskList) => {
+  console.log(`Edit ${unique_id}`);
+};
+
+
+export { deleteTask, editTask };

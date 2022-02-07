@@ -1,5 +1,5 @@
-import deleteTask from "./deleteTask.js";
-export default function todaysEvents(test) {
+import { deleteTask, editTask } from './modifyTasklist.js';
+export default function todaysEvents(taskArray) {
 
     // retrieve taskList array from localStorage
     let taskList= JSON.parse(localStorage.getItem('taskList'));
@@ -7,7 +7,7 @@ export default function todaysEvents(test) {
     let displayTasks;
     let pageTitle;
 
-    if (test === 'seven') {
+    if (taskArray === 'seven') {
       displayTasks = taskList.filter(task => task.DateDue > new Date().toISOString().slice(0,10));
       const currentTab = document.querySelector('.sevenDayTab');
       currentTab.style.pointerEvents = "none";
@@ -19,9 +19,8 @@ export default function todaysEvents(test) {
 
       pageTitle = "Next Seven Days";
         
-    } else {
+    } else if (taskArray === 'today') {
 
-      if (test === 'today')
       displayTasks = taskList.filter(task => task.DateDue === new Date().toISOString().slice(0,10));
       const currentTab = document.querySelector('.todayTab');
       currentTab.style.pointerEvents = "none";
@@ -32,6 +31,24 @@ export default function todaysEvents(test) {
       todayTab.classList.remove("active");
 
       pageTitle = "Today's Tasks";
+
+    }  else {
+
+      displayTasks = taskList.filter(task => task.Catagory === taskArray);
+      const currentTab = document.querySelector(`[data-name = '${taskArray}']`);
+      currentTab.style.pointerEvents = "none";
+      currentTab.classList.add("active");  
+
+      document.querySelectorAll(".projectTitle").forEach(function(item) {
+        if (item.dataset.name !== taskArray) {
+          item.style.pointerEvents = "auto";
+          item.classList.remove("active");
+        };
+      });
+
+
+      pageTitle = taskArray;
+
     }
 
 
@@ -91,6 +108,13 @@ export default function todaysEvents(test) {
         deleteTask(item.value, taskList);
       });
     });
+
+      // Modify task from taskList array
+      document.querySelectorAll(".modifyTask").forEach(function(item) {
+        item.addEventListener("click", () => {
+          editTask(item.value, taskList);
+        });
+      });
     
     
 }

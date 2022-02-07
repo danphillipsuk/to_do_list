@@ -1,5 +1,8 @@
 import config from './config.js';
-export default (function tabs() {
+
+
+const tabMenu = () => {
+
 
     // get global variabels from config.js
     let taskList= config.taskList();
@@ -30,4 +33,6 @@ export default (function tabs() {
 
 
 
-})();
+};
+
+export { tabMenu };

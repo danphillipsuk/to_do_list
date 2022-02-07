@@ -1,6 +1,9 @@
+// This module creates tabs/buttons for each catagory of tasks and allocates a dataset.name to allow taskList array filtering
 import config from './config.js';
-export default (function projectOverview() {
+import todaysEvents from './todaysEvents.js';
 
+const projectOverview = () => {
+  
     // get global variabels from config.js
     let taskList= config.taskList();
     const mainContent = config.mainContent();
@@ -26,17 +29,20 @@ export default (function projectOverview() {
       const num = countProjects[project];
       const projectTab = document.createElement('div');
       projectTab.classList.add('projectTitle');
+      projectTab.dataset.name = project;
       projectTab.innerText = `${project} ${num}`;
       projectMenu.appendChild(projectTab);
     })
 
-
+    // add event listener to pass dataset name to display array and refresh dom element
     document.querySelectorAll(".projectTitle").forEach(function(item) {
       item.addEventListener("click", () => {
-        console.log(item.innerText);
+        mainContent.removeChild(mainContent.childNodes[3]);
+        todaysEvents(item.dataset.name);
       });
     });
   
+  
+};
 
-
-})();
+export { projectOverview };

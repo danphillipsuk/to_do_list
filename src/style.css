@@ -164,18 +164,18 @@
 }
 
 #todaysEvents .modifyTask, #todaysEvents .deleteTask {
-
-    cursor: pointer;
-    font-size: .8em;
+  text-align: center;
+  cursor: pointer;
+  font-size: .8em;
 }
 
 .deleteTask {
-    background:rgb(248, 63, 6);
-    color:rgb(255, 255, 255);
-    font-weight: bold;
-    padding: 5px 10px;
-    border-radius: 3px;
-    border: solid 2px rgb(190, 55, 21);
+  background:rgb(248, 63, 6);
+  color:rgb(255, 255, 255);
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 3px;
+  border: solid 2px rgb(190, 55, 21);
 }
 
 .deleteTask:hover {
@@ -195,11 +195,7 @@
     transition: .5s;
 }
 
-.sevenDayEvents .today {
-    background: rgb(240, 113, 10);
-}
-
-.Title {
+.taskTitle {
     width: 40%;
 }
 
@@ -236,4 +232,8 @@
 
 #projectMenu div:hover {
   background:rgb(122, 122, 122);
+}
+
+#projectMenu div.active {
+  background-color: aqua;
 }

@@ -42,7 +42,7 @@ export default function createTask() {
         window.localStorage.setItem("taskList", JSON.stringify(taskList));
 
         const test = document.getElementById("mainContent");
-        test.removeChild(test.childNodes[2]);
+        test.removeChild(test.childNodes[3]);
         todaysEvents('today'); 
       }
     }
