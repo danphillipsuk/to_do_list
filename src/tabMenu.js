@@ -1,9 +1,9 @@
+import config from './config.js';
 export default (function tabs() {
 
-    // // Get taskList array from localStorage
-    let taskList= JSON.parse(localStorage.getItem('taskList'));
-
-    const mainContent = document.getElementById('mainContent');
+    // get global variabels from config.js
+    let taskList= config.taskList();
+    const mainContent = config.mainContent();
 
     const tabContainer = document.createElement('div');
     tabContainer.classList.add('tabContainer');
@@ -18,11 +18,6 @@ export default (function tabs() {
     const todayLength = today.length;
     todaysTasksNumber.innerHTML = `<span>${todayLength}</span> Tasks Today`;
 
-    const tomorrowTasksNumber = document.createElement('p');
-    const tomorrowTasks= taskList.filter(task => task.DateDue > new Date().toISOString().slice(0,10));
-    const tomorrowTasksLength = tomorrowTasks.length;
-    tomorrowTasksNumber.innerHTML = `<span>${tomorrowTasksLength}</span> Tasks Tomorrow`;
-
     const SevenTasksNumber = document.createElement('p');
     SevenTasksNumber.classList.add('sevenDayTab');
     const nextSevenTasksNumber = taskList.filter(task => task.DateDue > new Date().toISOString().slice(0,10));
@@ -31,7 +26,7 @@ export default (function tabs() {
 
 
 
-    tabMenu.append(todaysTasksNumber, tomorrowTasksNumber, SevenTasksNumber);
+    tabMenu.append(todaysTasksNumber, SevenTasksNumber);
 
 
 

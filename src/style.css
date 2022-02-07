@@ -221,3 +221,19 @@
  .modifyTask {
      width: 10%;
  }
+
+ #projectMenu {
+   background-color: antiquewhite;
+   width: 100%;
+   display: flex;
+ }
+
+ #projectMenu div {
+   background:rgb(184, 184, 184);
+   padding: 10px 20px;
+   cursor: pointer;
+ }
+
+#projectMenu div:hover {
+  background:rgb(122, 122, 122);
+}

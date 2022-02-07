@@ -1,11 +1,12 @@
 import _ from 'lodash';
 import './style.css';
-
+import projectOverview from './projectOverview.js';
 
 import header from './header.js';
 import tabs from './tabMenu.js';
 import todaysEvents from './todaysEvents';
 import createTask from './createTask.js';
+
 
 // Get taskList from localStorage or create it if not found (first time visitor)
 let taskList= JSON.parse(localStorage.getItem('taskList'));
@@ -24,14 +25,14 @@ todaysEvents('today');
 
 document.querySelector('.todayTab').addEventListener('click', function() {
     const refresh = document.getElementById("mainContent");
-    refresh.removeChild(refresh.childNodes[2]);
+    refresh.removeChild(refresh.childNodes[3]);
     todaysEvents('today')
 });
 
 
 document.querySelector('.sevenDayTab').addEventListener('click', function() {
     const refresh = document.getElementById("mainContent");
-    refresh.removeChild(refresh.childNodes[2]);
+    refresh.removeChild(refresh.childNodes[3]);
     todaysEvents('seven')
 });
 
