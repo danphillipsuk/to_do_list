@@ -1,3 +1,4 @@
+import deleteTask from "./deleteTask.js";
 export default function todaysEvents(test) {
 
     // retrieve taskList array from localStorage
@@ -5,32 +6,32 @@ export default function todaysEvents(test) {
 
     let displayTasks;
     let pageTitle;
+
     if (test === 'seven') {
-        displayTasks = taskList.filter(task => task.DateDue > new Date().toISOString().slice(0,10));
-        const currentTab = document.querySelector('.sevenDayTab');
-        currentTab.style.pointerEvents = "none";
-        currentTab.classList.add("active");  
+      displayTasks = taskList.filter(task => task.DateDue > new Date().toISOString().slice(0,10));
+      const currentTab = document.querySelector('.sevenDayTab');
+      currentTab.style.pointerEvents = "none";
+      currentTab.classList.add("active");  
 
-        const todayTab = document.querySelector('.todayTab');
-        todayTab.style.pointerEvents = "auto";
-        todayTab.classList.remove("active");
+      const todayTab = document.querySelector('.todayTab');
+      todayTab.style.pointerEvents = "auto";
+      todayTab.classList.remove("active");
 
-        pageTitle = "Next Seven Days";
+      pageTitle = "Next Seven Days";
         
-
     } else {
-        if (test === 'today')
-        displayTasks = taskList.filter(task => task.DateDue === new Date().toISOString().slice(0,10));
-        const currentTab = document.querySelector('.todayTab');
-        currentTab.style.pointerEvents = "none";
-        currentTab.classList.add("active");  
 
-        const todayTab = document.querySelector('.sevenDayTab');
-        todayTab.style.pointerEvents = "auto";
-        todayTab.classList.remove("active");
+      if (test === 'today')
+      displayTasks = taskList.filter(task => task.DateDue === new Date().toISOString().slice(0,10));
+      const currentTab = document.querySelector('.todayTab');
+      currentTab.style.pointerEvents = "none";
+      currentTab.classList.add("active");  
 
-        pageTitle = "Today's Tasks";
+      const todayTab = document.querySelector('.sevenDayTab');
+      todayTab.style.pointerEvents = "auto";
+      todayTab.classList.remove("active");
 
+      pageTitle = "Today's Tasks";
     }
 
 
@@ -86,29 +87,10 @@ export default function todaysEvents(test) {
 
     // Delete task from taskList array
     document.querySelectorAll(".deleteTask").forEach(function(item) {
-
-        item.addEventListener("click", (item) => {
-            console.log(item)
-    
-            const rmv = item.value;
-
-            const fuck = taskList.findIndex((obj) => {
-                if(obj.id == rmv) {
-                    return true
-                }
-                return false;
-            })
-
-            taskList.splice(fuck, 1);
-            localStorage.setItem("taskList", JSON.stringify(taskList));
-            const refresh = document.getElementById("mainContent");
-            refresh.removeChild(refresh.childNodes[2]);
-            display();
-            
-        })
-        
-
-    })
+      item.addEventListener("click", () => {
+        deleteTask(item.value, taskList);
+      });
+    });
     
     
 }

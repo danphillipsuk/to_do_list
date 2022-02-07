@@ -5,7 +5,7 @@ export default function createTask() {
     // create new task form 
     const taskForm = document.createElement('div');
     taskForm.classList.add('taskForm');
-    taskForm.innerHTML = '<h2>CREATE A NEW TASK</h2><div class="formElement taskTitle"><label for="taskTitle">Task</label><input name ="taskTitle" type="text"></div><div class="formElement"><label for="taskCatagory">Catagory</label><select name="taskCatagory"><option value="Home">Home</option><option value="work">Work</option></select></div><div class="formElement"><label for="dueDate">Due Date</label><input type="date" name="dueDate"></div><div class="formElement"><label for="taskTime">Time</label><input type="time" name="time"></div><button id="submit">Add Task</button>';
+    taskForm.innerHTML = '<h2>CREATE A NEW TASK</h2><div class="formElement taskTitle"><label for="taskTitle">Task</label><input name ="taskTitle" type="text"></div><div class="formElement"><label for="taskCatagory">Project</label><input name="taskCatagory" type="text"></div><div class="formElement"><label for="dueDate">Due Date</label><input type="date" name="dueDate"></div><div class="formElement"><label for="taskTime">Time</label><input type="time" name="time"></div><button id="submit">Add Task</button>';
 
     document.getElementById("content").prepend(taskForm);
 
@@ -14,42 +14,37 @@ export default function createTask() {
 
 
     class taskClass {
-        constructor(id, title, catagory, dateDue, time) {
-            this.id = id;
-            this.Title = title;
-            this.Catagory = catagory;
-            this.DateDue = dateDue;
-            this.Time = time;
-        }
+      constructor(id, title, catagory, dateDue, time) {
+        this.id = id;
+        this.Title = title;
+        this.Catagory = catagory;
+        this.DateDue = dateDue;
+        this.Time = time;
+      }
     } 
 
     //function to run on taskForm submit
     function newTask () {
-        const title = document.querySelector("input[name='taskTitle']").value;
-        const catagory = document.querySelector("select[name='taskCatagory']").value;
-        const dueDate = document.querySelector("input[name='dueDate']").value;
-        const time = document.querySelector("input[name='time']").value;
+      const title = document.querySelector("input[name='taskTitle']").value;
+      const catagory = document.querySelector("input[name='taskCatagory']").value;
+      const dueDate = document.querySelector("input[name='dueDate']").value;
+      const time = document.querySelector("input[name='time']").value;
         
-        if (title !== '' && dueDate !== '') {
-            const id = Math.random();
+      if (title !== '' && dueDate !== '') {
+        const id = Math.random();
         
-            // Create a new task object
-            const newAddition = new taskClass(id, title, catagory, dueDate, time);
+        // Create a new task object
+        const newAddition = new taskClass(id, title, catagory, dueDate, time);
 
-            // add new task to taskList array and set in localStorage
-            const taskList = JSON.parse(window.localStorage.getItem("taskList"));
-            taskList.push(newAddition);
-            window.localStorage.setItem("taskList", JSON.stringify(taskList));
+        // add new task to taskList array and set in localStorage
+        const taskList = JSON.parse(window.localStorage.getItem("taskList"));
+        taskList.push(newAddition);
+        window.localStorage.setItem("taskList", JSON.stringify(taskList));
 
-            // const test = document.getElementById("mainContent");
-            // if (test.childNodes[1] !== undefined) {
-            //     test.removeChild(test.childNodes[1]);
-            //     todaysEvents("hello from create task");
-            // };
-        }
-
-
+        const test = document.getElementById("mainContent");
+        test.removeChild(test.childNodes[2]);
+        todaysEvents('today'); 
+      }
     }
-    
-
+  
 };
