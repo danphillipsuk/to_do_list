@@ -20,8 +20,7 @@ const deleteTask = (unique_id, array) => {
 
   // upload new array to local storage
   localStorage.setItem("taskList", JSON.stringify(taskList));
-  const content = document.getElementById('content');
-  content.removeChild(content.childNodes[1]);
+  location.reload(); 
   
 };
 

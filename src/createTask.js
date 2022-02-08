@@ -69,6 +69,7 @@ export default function createTask() {
         const taskList = JSON.parse(window.localStorage.getItem("taskList"));
         taskList.push(newAddition);
         window.localStorage.setItem("taskList", JSON.stringify(taskList));
+        location.reload(); 
 
       }
     }

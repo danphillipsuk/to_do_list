@@ -2,16 +2,27 @@ import { today } from './projectArrays.js';
 import { deleteTask, editTask } from './modifyTasklist.js';
 
 const tasklistPane = (list) => {
+
+  const headers = document.createElement('ul');
+  headers.innerHTML = 
+    '<ul id="columnHeaders">\
+      <li>Priority</li>\
+      <li>Time</li>\
+      <li>Task</li>\
+      <li>Catagory</li>\
+    </ul>';
+    
   
   const tasklistPane = document.createElement('section');
   tasklistPane.id = "tasklistPane";
-  const tasklistPaneContent = document.createElement('div');
-  tasklistPaneContent.id = "tasklistPaneContent";
-  tasklistPane.appendChild(tasklistPaneContent);
+  tasklistPane.appendChild(headers);
+
   const content = document.getElementById('content');
   content.appendChild(tasklistPane);
 
   content.removeChild(content.childNodes[1]);
+
+
   
 
   let displayArray;
@@ -53,6 +64,7 @@ const tasklistPane = (list) => {
     taskTitle.innerText = `${item.Title}`;
 
     const taskCatagory = document.createElement('li');
+    taskCatagory.classList.add('taskCatagory');
     taskCatagory.innerText = `${item.Catagory}`;
 
     document.querySelector('.taskItem').append(
@@ -91,6 +103,7 @@ const tasklistPane = (list) => {
         editTask(item.value, displayArray);
       });
     });
+    
 
 }
 

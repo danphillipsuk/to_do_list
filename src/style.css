@@ -111,6 +111,17 @@
     padding: 80px;
 }
 
+#columnHeaders{
+  width: 100%;
+  font-size: .8em;
+  font-weight: 800;
+  color: var(--darkGrey);
+}
+
+#columnHeaders > li:first-child {
+  width: 40px;
+}
+
 
 #tasklistPane h3 {
   font-size: 2em;
@@ -144,19 +155,19 @@
   height: 20px;
   width: 20px;
   border-radius: 10px;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 .taskPriority.low {
-  border: double 5px var(--darkGrey);
+  border: double 12px var(--darkGrey);
 }
 
 .taskPriority.medium {
-  border: double 5px var(--mistyBlue);
+  border: double 12px var(--mistyBlue);
 }
 
 .taskPriority.high {
-  border: double 5px var(--coral);
+  border: double 12px var(--coral);
 }
 
 #tasklistPane .modifyTask, #tasklistPane .deleteTask {
@@ -182,16 +193,16 @@
   color: var(--teal);
 }
 
-.taskTime {
+.taskTime, #columnHeaders > li:nth-of-type(2) {
   width: 7%;
 }
 
-.taskTitle {
-    width: 40%;
+.taskTitle, #columnHeaders > li:nth-of-type(3) {
+    width: 30%;
 }
 
-.Catagory {
-    width: 10%;
+.taskCatagory, #columnHeaders > li:nth-of-type(4) {
+    width: 20%;
 }
 
 .DateDue {
