@@ -1,5 +1,5 @@
 import { today } from './projectArrays.js';
-import { deleteTask, editTask } from './modifyTasklist.js';
+import { deleteTask, editTask, viewProject } from './modifyTasklist.js';
 
 const tasklistPane = (list) => {
 
@@ -9,7 +9,8 @@ const tasklistPane = (list) => {
       <li>Priority</li>\
       <li>Time</li>\
       <li>Task</li>\
-      <li>Catagory</li>\
+      <li>Project</li>\
+      <li>Day Due</li>\
     </ul>';
     
   
@@ -40,6 +41,7 @@ const tasklistPane = (list) => {
     document.getElementById('tasklistPane').prepend(taskItem);
 
     const taskPriority = document.createElement('li');
+    const taskPriorityInner = document.createElement('span');
     taskPriority.classList.add('taskPriority');
     switch(item.Priority) {
       case 'low':
@@ -54,6 +56,7 @@ const tasklistPane = (list) => {
       default:
         break;
     }
+    taskPriority.append(taskPriorityInner);
 
     const taskTime = document.createElement('li');
     taskTime.classList.add('taskTime');
@@ -67,31 +70,45 @@ const tasklistPane = (list) => {
     taskCatagory.classList.add('taskCatagory');
     taskCatagory.innerText = `${item.Catagory}`;
 
+    const taskDateDue = document.createElement('li');
+    taskDateDue.classList.add('taskDateDue');
+    taskDateDue.innerText = `${item.DateDue}`;
+
+    // create container for buttons
+    const buttonWrapper = document.createElement('div');
+    buttonWrapper.classList.add('buttonWrapper');
+
     // create modify task button for each task
     const modifyTask = document.createElement('button');
     modifyTask.value = `${item['id']}`;
     modifyTask.classList.add('modifyTask');
     modifyTask.innerText = "Modify Task";
   
-    
     // create delete button for each task
     const deleteTask = document.createElement('button');
     deleteTask.value = `${item['id']}`;
     deleteTask.classList.add('deleteTask');
     deleteTask.innerText = "Delete";
+
+    // create view project button for each task
+    const viewProject = document.createElement('button');
+    viewProject.value = `${item['id']}`;
+    viewProject.classList.add('viewProject');
+    viewProject.innerText = "View Project";
+    buttonWrapper.append(modifyTask, deleteTask, viewProject);
   
     document.querySelector('.taskItem').append(
       taskPriority,
       taskTime, 
       taskTitle,
       taskCatagory,
-      modifyTask,
-      deleteTask
+      taskDateDue,
+      buttonWrapper
       );
 
   })
   tasklistPane.prepend(headers);
-  
+
   // Delete task from taskList array
   document.querySelectorAll(".deleteTask").forEach(function(item) {
     item.addEventListener("click", () => {
@@ -103,6 +120,13 @@ const tasklistPane = (list) => {
     document.querySelectorAll(".modifyTask").forEach(function(item) {
       item.addEventListener("click", () => {
         editTask(item.value, displayArray);
+      });
+    });
+
+    // Modify task from taskList array
+    document.querySelectorAll(".viewProject").forEach(function(item) {
+      item.addEventListener("click", () => {
+        viewProject(item.value);
       });
     });
     

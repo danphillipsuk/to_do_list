@@ -27,8 +27,12 @@ const deleteTask = (unique_id, array) => {
 // Modify task in main taskList array
 const editTask = (unique_id) => {
   console.log(`Edit ${unique_id}`);
-  console.log(array)
+
+};
+
+const viewProject = (unique_id) => {
+  console.log(`Edit ${unique_id}`);
 };
 
 
-export { deleteTask, editTask };
+export { deleteTask, editTask, viewProject };
