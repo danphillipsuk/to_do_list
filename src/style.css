@@ -3,8 +3,8 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
     list-style-type: none;
+    --darkGrey: rgb(209, 209, 209);
     --grey: rgb(230, 230, 230);
     --lightGrey: rgb(245, 245, 245);
     --veryLightGrey: rgb(250, 250, 250);
@@ -14,6 +14,7 @@
     --ivory: #f4eae6;
     --teal: #4297a0;
     --white: #fff;
+    font-family: 'Raleway', sans-serif;
   }
 
 #content {
@@ -22,7 +23,6 @@
     display: flex;
     height: 90vh;
     color: var(--textColor);
-    font-family: 'Raleway', sans-serif;
 }
 
 .header {
@@ -37,7 +37,7 @@
 
 .headerContainer {
     max-width: 1400px;
-    padding: 25px 20px;
+    padding: 15px 20px;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -49,32 +49,33 @@
     color: var(--ivory);
 }
 
+#createForm {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
 
 .taskForm {
-    width: 25%;
+    width: 100%;
     display: flex;
-    flex-direction: column;
     padding: 20px; 
 }
 
 .taskForm h2 {
-    padding: 20px;
-    font-size: 1em;
-    background:rgb(0, 152, 163);
-    color: #FFF;
-    width: 100%;
-    margin-bottom: 10px;
+  color: var(--textColor);
+  font-size: 1em;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 .taskForm .formElement {
-    width: 100%;
-
+  width: 100%;
 }
 
 .taskForm label {
-    display: block;
-    font-size: .8em;
-    margin-bottom: 5px;
+  display: block;
+  font-size: .8em;
+  margin-bottom: 5px;
 }
 
 .taskForm input, .taskForm select {
@@ -104,13 +105,19 @@
 }
 
 
-#todaysEvents {
-    width: 65%;
+#tasklistPane {
+    width: 75%;
     background: var(--veryLightGrey);
     padding: 80px;
 }
 
-#todaysEvents ul{
+
+#tasklistPane h3 {
+  font-size: 2em;
+  font-weight: 300;
+}
+
+#tasklistPane ul{
     margin: 5px 0;
     padding: 20px 0;
     display: flex;
@@ -120,12 +127,12 @@
     border-bottom: solid 1px var(--grey);
 }
 
-#todaysEvents ul:hover {
+#tasklistPane ul:hover {
     background: var(--veryLightGrey);
-
     transition: .8s;
 }
-#todaysEvents ul li span{
+
+#tasklistPane ul li span{
     display: block;
     font-size: .6em;
     letter-spacing: .3em;
@@ -133,36 +140,50 @@
     font-weight: bold;
 }
 
-#todaysEvents .modifyTask, #todaysEvents .deleteTask {
-  text-align: center;
-  cursor: pointer;
+#tasklistPane ul li.taskPriority {
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+.taskPriority.low {
+  border: double 5px var(--darkGrey);
+}
+
+.taskPriority.medium {
+  border: double 5px var(--mistyBlue);
+}
+
+.taskPriority.high {
+  border: double 5px var(--coral);
+}
+
+#tasklistPane .modifyTask, #tasklistPane .deleteTask {
   font-size: .8em;
 }
 
-.deleteTask {
-  background:rgb(248, 63, 6);
-  color:rgb(255, 255, 255);
-  font-weight: bold;
-  padding: 5px 10px;
-  border-radius: 3px;
-  border: solid 2px rgb(190, 55, 21);
+.deleteTask, .modifyTask {
+ border: none;
+ background: none;
+ cursor: pointer;
 }
 
-.deleteTask:hover {
-    background:rgb(8, 202, 216);
-    transition: .5s;
+.deleteTask:hover, .modifyTask:hover {
+    transition: 1s;
+    text-decoration: underline;
+}
+
+.deleteTask {
+  color: var(--coral);
 }
 
 .modifyTask {
-    border-radius: 3px;
-    border: solid 2px rgb(21, 190, 148);
-    background:rgb(5, 214, 169);
-    color:rgb(3, 29, 17);    
+  color: var(--teal);
 }
 
-.modifyTask:hover {
-    background:rgb(8, 202, 216);
-    transition: .5s;
+.taskTime {
+  width: 7%;
 }
 
 .taskTitle {
@@ -184,10 +205,6 @@
     width: 5%;
  }
 
- .modifyTask {
-     width: 10%;
- }
-
  /* Mainpage left hand menu */
  #projectMenu {
    background: var(--lightGrey);
@@ -207,6 +224,7 @@
 
 #projectMenu p span {
   padding: 3px 6px;
+  font-weight: 500;
   border-radius: 5px;
   color: var(--white);
 }
@@ -232,7 +250,7 @@
 }
 
 #projectTabContainer h4 {
-  font-weight: lighter;
+  font-weight: 1000;
   font-size: 1.3em;
   margin-bottom: 15px;
 }
@@ -241,15 +259,18 @@
   background: var(--mistyBlue);
 }
 
+
+#projectMenu .tomorrowMenu span {
+  background: var(--teal);
+}
+
 #projectMenu .urgentMenu {
-  margin: 30px 0;
+  margin-top: 25px;
+  font-weight: 700;
   background: var(--coral);
-  border: none;
-  padding: 10px 0 10px 10px;
 }
 
 #projectMenu .urgentMenu span {
-  background: var(--white);
-  color: var(--mistyBlue);
+  background: var(--teal);
 }
 

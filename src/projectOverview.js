@@ -1,12 +1,13 @@
 // This module creates tabs/buttons for each catagory of tasks and allocates a dataset.name to allow taskList array filtering
 import config from './config.js';
-import todaysEvents from './todaysEvents.js';
-import addDays from 'date-fns/addDays'
+import { today, todaysNum, tomorrow, tomorrowsNum, countProjects,uniqueProjects, taskList } from './projectArrays.js';
+import { tasklistPane } from './tasklistPane.js';
 
 const projectOverview = () => {
   
+
   // get global variabels from config.js
-  let taskList= config.taskList();
+
   const content = config.content();
 
   const projectMenu = document.createElement('div');
@@ -14,78 +15,46 @@ const projectOverview = () => {
   content.prepend(projectMenu);
 
   (function () {
-    const today = taskList.filter(task => task.DateDue === new Date().toISOString().slice(0,10));
-    const num = today.length;
+
     const projectTab = document.createElement('p');
     projectTab.classList.add('todayMenu');
-    projectTab.innerHTML= `TODAY <span> ${num}</span>`;
+    projectTab.innerHTML= `TODAY <span> ${todaysNum}</span>`;
     projectMenu.appendChild(projectTab);
     projectTab.addEventListener("click", () => {
-      content.removeChild(content.childNodes[3]);
-      todaysEvents('today');
+      tasklistPane(today);
     });
-})();
+  })();
 
-(function () {
-    const today = taskList.filter(task => task.DateDue === new Date().toISOString().slice(0,10));
+  (function () {
 
-    
-    let todaysDate = addDays(new Date(), 1);
-    let tomorrowsDate = todaysDate.toISOString().slice(0,10);
-    console.log(tomorrowsDate);
-    const tomorrow = taskList.filter(task => task.DateDue === tomorrowsDate);
+      const projectTab = document.createElement('p');
+      projectTab.classList.add('tomorrowMenu');
+      projectTab.innerHTML= `TOMORROW <span> ${tomorrowsNum}</span>`;
+      projectMenu.appendChild(projectTab);
+      projectTab.addEventListener("click", () => {
+        tasklistPane(tomorrow);
+      });
+    })();
 
-    const num = tomorrow.length;
+  (function () {
+      const projectTab = document.createElement('p');
+      projectTab.classList.add('sevenDayMenu');
+      projectTab.innerHTML= `NEXT 7 DAYS <span>3</span>`;
+      projectMenu.appendChild(projectTab);
+      projectTab.addEventListener("click", () => {
+        tasklistPane("hell0 from next seven days");
+      });
+  })();
+
+  (function () {
     const projectTab = document.createElement('p');
-    projectTab.classList.add('tomorrowMenu');
-    projectTab.innerHTML= `TOMORROW <span> ${num}</span>`;
+    projectTab.classList.add('urgentMenu');
+    projectTab.innerHTML= `HIGH PRIORITY <span>1</span>`;
     projectMenu.appendChild(projectTab);
     projectTab.addEventListener("click", () => {
-      content.removeChild(content.childNodes[3]);
-      todaysEvents('tomorrow', tomorrowsDate);
+      tasklistPane("High Priority");
     });
-})();
-
-(function () {
-    const today = taskList.filter(task => task.DateDue === new Date().toISOString().slice(0,10));
-    const num = today.length;
-    const projectTab = document.createElement('p');
-    projectTab.classList.add('sevenDayMenu');
-    projectTab.innerHTML= `NEXT 7 DAYS <span> ${num}</span>`;
-    projectMenu.appendChild(projectTab);
-    projectTab.addEventListener("click", () => {
-      content.removeChild(content.childNodes[3]);
-      todaysEvents('today');
-    });
-})();
-
-(function () {
-  const today = taskList.filter(task => task.DateDue === new Date().toISOString().slice(0,10));
-  const num = today.length;
-  const projectTab = document.createElement('p');
-  projectTab.classList.add('urgentMenu');
-  projectTab.innerHTML= `URGENT <span> ${num}</span>`;
-  projectMenu.appendChild(projectTab);
-  projectTab.addEventListener("click", () => {
-    content.removeChild(content.childNodes[3]);
-    todaysEvents('today');
-  });
-})();
-
-
-
-
-  // create new array of catagory names
-  const projects = taskList.map(project => project.Catagory);
-
-  // count ocurrances of each catagory name 
-  const countProjects = projects.reduce((acc, value) => {
-    return { 
-      ...acc, [value]:(acc[value] || 0) + 1};
-    }, {});
-
-  // create array of unique catagory names
-  const uniqueProjects = projects.filter((i, index) => projects.indexOf(i) === index);
+  })();
 
   const projectTabContainer = document.createElement('div');
   projectTabContainer.id = 'projectTabContainer';
@@ -105,8 +74,8 @@ const projectOverview = () => {
   // add event listener to pass dataset name to display array and refresh dom element
   document.querySelectorAll(".projectTitle").forEach(function(item) {
     item.addEventListener("click", () => {
-      content.removeChild(content.childNodes[3]);
-      todaysEvents(item.dataset.name);
+      const project = taskList.filter(task => task.Catagory === item.dataset.name);
+      tasklistPane(project);
     });
   });
   

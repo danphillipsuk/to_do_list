@@ -5,8 +5,6 @@ module.exports = {
     mode: "development", // Remove for production
     entry:  {
         index: './src/index.js',
-        todaysEvents: './src/todaysEvents.js',
-        form: './src/createTask.js',
         
             },
     devtool: 'inline-source-map',

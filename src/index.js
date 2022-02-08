@@ -1,17 +1,14 @@
 import _ from 'lodash';
 import './style.css';
 import header from './header.js';
-
-import todaysEvents from './todaysEvents';
+import { projectOverview } from './projectOverview.js';
+import { tasklistPane } from './tasklistPane.js';
 import createTask from './createTask.js';
 
 
-import { projectOverview } from './projectOverview.js';
-
-import { createForm } from './domCreate.js';
-
 projectOverview();
-
+tasklistPane()
+createTask();
 
 // Get taskList from localStorage or create it if not found (first time visitor)
 let taskList= JSON.parse(localStorage.getItem('taskList'));
@@ -23,13 +20,20 @@ if (taskList === null) {
     let taskList = JSON.parse(localStorage.getItem('taskList'));
 };
 
-todaysEvents('today');
-createTask(); // Calls module to create task form and push new task to localStorage
+  // Delete task from taskList array
+  // document.querySelectorAll(".deleteTask").forEach(function(item) {
+  //   item.addEventListener("click", () => {
+  //     console.log("hello")
+  //     deleteTask(item.value, taskList);
+  //   });
+  // });
 
+  //   // Modify task from taskList array
+  //   document.querySelectorAll(".modifyTask").forEach(function(item) {
+  //     item.addEventListener("click", () => {
+  //       editTask(item.value, taskList);
+  //     });
+  //   });
 
-
-
-
-//createForm();
 
 
