@@ -14,6 +14,11 @@
     --ivory: #f4eae6;
     --teal: #4297a0;
     --white: #fff;
+    --yellow: #FAD02C;
+    --darkBlue: #333652;
+    --pewter: #E9EAEC;
+    --blueGrey: #90ADC6;
+
     font-family: 'Raleway', sans-serif;
   }
 
@@ -29,7 +34,7 @@
     width: 100%;
     position: sticky;
     top: 0;
-    background: var(--mistyBlue);
+    background: var(--darkBlue);
     box-shadow: 5px 2px 10px rgb(206, 206, 206, .4);
     z-index: 10;
 }
@@ -46,7 +51,7 @@
 
 .header h2 {
     font-size: 1em;
-    color: var(--ivory);
+    color: var(--yellow);
 }
 
 #createForm {
@@ -121,22 +126,17 @@
   display: flex;
 }
 
-#columnHeaders > li:first-child {
-  width: 60px;
-}
-
-
 #tasklistPane h3 {
   font-size: 2em;
   font-weight: 300;
 }
 
 .taskItem {
-    margin: 5px 0;
+    margin: 2px 0;
     padding: 20px 0;
     display: flex;
+    flex-wrap: wrap;
     align-items: centre;
-    gap: 5px;
     border-top: solid 1px var(--grey);
     border-bottom: solid 1px var(--grey);
 }
@@ -154,50 +154,33 @@
     font-weight: bold;
 }
 
-.taskItem li.taskPriority {
+.taskPriority span {
   height: 20px;
   width: 20px;
-  border-radius: 10px;
-  margin: 0 10px;
+  border-radius: 20px;
+  margin: 0 auto;
 }
 
-.taskPriority.low {
-  border: double 12px var(--darkGrey);
+.taskPriority.low span {
+  border: double 5px var(--darkGrey);
 }
 
-.taskPriority.medium {
+.taskPriority.medium span {
   border: double 12px var(--mistyBlue);
 }
 
-.taskPriority.high {
+.taskPriority.high span {
   border: double 12px var(--coral);
 }
 
-#tasklistPane .modifyTask, #tasklistPane .deleteTask {
-  font-size: .8em;
-}
-
-.deleteTask, .modifyTask {
- border: none;
- background: none;
- cursor: pointer;
-}
-
-.deleteTask:hover, .modifyTask:hover {
-    transition: 1s;
-    text-decoration: underline;
-}
-
-.deleteTask {
-  color: var(--coral);
-}
-
-.modifyTask {
-  color: var(--teal);
+#columnHeaders > li:first-child, .taskItem li.taskPriority  {
+  width: 7%;
+  text-align: center;
 }
 
 .taskTime, #columnHeaders > li:nth-of-type(2) {
-  width: 7%;
+  width: 8%;
+  text-align: center;
 }
 
 .taskTitle, #columnHeaders > li:nth-of-type(3) {
@@ -208,15 +191,38 @@
     width: 20%;
 }
 
-.DateDue {
+.taskDateDue {
     width: 20%;
 }
- .Time {
-    width: 10%;
+
+ .buttonWrapper {
+   flex-basis: 85%;
+   margin-left: 15%;
  }
 
+ .deleteTask, .modifyTask, .viewProject {
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin-right: 10px;
+  font-weight: 600;
+ }
+ 
+ .deleteTask:hover, .modifyTask:hover, .viewProject:hover {
+  transition: 1s;
+  text-decoration: underline;
+}
+ 
  .deleteTask {
-    width: 5%;
+   color: var(--coral);
+ }
+ 
+ .modifyTask {
+   color: var(--teal);
+ }
+ 
+ .viewProject {
+   color: var(--darkBlue);
  }
 
  /* Mainpage left hand menu */
