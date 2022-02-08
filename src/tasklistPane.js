@@ -15,11 +15,11 @@ const tasklistPane = (list) => {
   
   const tasklistPane = document.createElement('section');
   tasklistPane.id = "tasklistPane";
-  tasklistPane.appendChild(headers);
+
 
   const content = document.getElementById('content');
   content.appendChild(tasklistPane);
-
+  tasklistPane.prepend(headers);
   content.removeChild(content.childNodes[1]);
 
 
@@ -52,8 +52,8 @@ const tasklistPane = (list) => {
         taskPriority.classList.add('high');
         break;
       default:
+        break;
     }
-
 
     const taskTime = document.createElement('li');
     taskTime.classList.add('taskTime');
@@ -67,29 +67,31 @@ const tasklistPane = (list) => {
     taskCatagory.classList.add('taskCatagory');
     taskCatagory.innerText = `${item.Catagory}`;
 
-    document.querySelector('.taskItem').append(
-      taskPriority,
-      taskTime, 
-      taskTitle,
-      taskCatagory
-      );
-
-
     // create modify task button for each task
     const modifyTask = document.createElement('button');
     modifyTask.value = `${item['id']}`;
     modifyTask.classList.add('modifyTask');
     modifyTask.innerText = "Modify Task";
-    document.querySelector('.taskItem').append(modifyTask);
+  
     
     // create delete button for each task
     const deleteTask = document.createElement('button');
     deleteTask.value = `${item['id']}`;
     deleteTask.classList.add('deleteTask');
     deleteTask.innerText = "Delete";
-    document.querySelector('.taskItem').append(deleteTask);
-  })
+  
+    document.querySelector('.taskItem').append(
+      taskPriority,
+      taskTime, 
+      taskTitle,
+      taskCatagory,
+      modifyTask,
+      deleteTask
+      );
 
+  })
+  tasklistPane.prepend(headers);
+  
   // Delete task from taskList array
   document.querySelectorAll(".deleteTask").forEach(function(item) {
     item.addEventListener("click", () => {
@@ -104,7 +106,7 @@ const tasklistPane = (list) => {
       });
     });
     
-
+    
 }
 
 export { tasklistPane }
