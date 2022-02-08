@@ -4,7 +4,7 @@ import config from './config.js';
 // Delete task from main taskList array
 const deleteTask = (unique_id, taskList) => {
   // get global variabels from config.js
-  const mainContent = config.mainContent();
+  const mainContent = config.content();
 
   // find index of item to delete in master array (taskList)
   const taskListIndex = taskList.findIndex((obj) => {

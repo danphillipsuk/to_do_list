@@ -3,11 +3,11 @@ import todaysEvents from "./todaysEvents";
 export default function createTask() {
 
     // create new task form 
-    const taskForm = document.createElement('div');
+    const taskForm = document.createElement('section');
     taskForm.classList.add('taskForm');
     taskForm.innerHTML = '<h2>CREATE A NEW TASK</h2><div class="formElement taskTitle"><label for="taskTitle">Task</label><input name ="taskTitle" type="text"></div><div class="formElement"><label for="taskCatagory">Project</label><input name="taskCatagory" type="text"></div><div class="formElement"><label for="dueDate">Due Date</label><input type="date" name="dueDate"></div><div class="formElement"><label for="taskTime">Time</label><input type="time" name="time"></div><button id="submit">Add Task</button>';
 
-    document.getElementById("content").prepend(taskForm);
+    document.getElementById("content").append(taskForm);
 
     //listen for task form submit
     document.getElementById("submit").addEventListener("click", newTask);
@@ -41,7 +41,7 @@ export default function createTask() {
         taskList.push(newAddition);
         window.localStorage.setItem("taskList", JSON.stringify(taskList));
 
-        const test = document.getElementById("mainContent");
+        const test = document.getElementById("content");
         test.removeChild(test.childNodes[3]);
         todaysEvents('today'); 
       }

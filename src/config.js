@@ -3,7 +3,7 @@ export default {
   taskList: function () {
     return JSON.parse(localStorage.getItem('taskList'));
   },
-  mainContent: function () {
-    return document.getElementById('mainContent');
+  content: function () {
+    return document.getElementById('content');
   }
 }

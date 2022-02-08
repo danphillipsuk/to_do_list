@@ -1,5 +1,5 @@
 import { deleteTask, editTask } from './modifyTasklist.js';
-export default function todaysEvents(taskArray) {
+export default function todaysEvents(taskArray, date) {
 
     // retrieve taskList array from localStorage
     let taskList= JSON.parse(localStorage.getItem('taskList'));
@@ -9,30 +9,19 @@ export default function todaysEvents(taskArray) {
 
     if (taskArray === 'seven') {
       displayTasks = taskList.filter(task => task.DateDue > new Date().toISOString().slice(0,10));
-      const currentTab = document.querySelector('.sevenDayTab');
-      currentTab.style.pointerEvents = "none";
-      currentTab.classList.add("active");  
-
-      const todayTab = document.querySelector('.todayTab');
-      todayTab.style.pointerEvents = "auto";
-      todayTab.classList.remove("active");
-
       pageTitle = "Next Seven Days";
         
     } else if (taskArray === 'today') {
 
       displayTasks = taskList.filter(task => task.DateDue === new Date().toISOString().slice(0,10));
-      const currentTab = document.querySelector('.todayTab');
-      currentTab.style.pointerEvents = "none";
-      currentTab.classList.add("active");  
 
-      const todayTab = document.querySelector('.sevenDayTab');
-      todayTab.style.pointerEvents = "auto";
-      todayTab.classList.remove("active");
 
-      pageTitle = "Today's Tasks";
+      pageTitle = "Today";
 
-    }  else {
+    } else if (taskArray === 'tomorrow') {
+      displayTasks = taskList.filter(task => task.DateDue === date);
+      pageTitle = "Tomorrow";
+    } else {
 
       displayTasks = taskList.filter(task => task.Catagory === taskArray);
       const currentTab = document.querySelector(`[data-name = '${taskArray}']`);
@@ -55,9 +44,9 @@ export default function todaysEvents(taskArray) {
     // Display Events/Tasks due today
     function display() {
 
-        const todaysEvents = document.createElement('div');
+        const todaysEvents = document.createElement('section');
         todaysEvents.id ='todaysEvents';
-        document.getElementById("mainContent").append(todaysEvents);
+        document.getElementById("content").append(todaysEvents);
     
         displayTasks.forEach((item, index) => {
 
@@ -71,7 +60,7 @@ export default function todaysEvents(taskArray) {
             taskTitle.innerText = `${item.Title}`;
 
             const taskTitleCatagory = document.createElement('span');
-            taskTitleCatagory.innerText = `${item.Catagory}`;
+            taskTitleCatagory.innerText = `PROJECT: ${item.Catagory}`;
             taskTitle.prepend(taskTitleCatagory);
 
             document.querySelector('.taskItem').appendChild(taskTitle);

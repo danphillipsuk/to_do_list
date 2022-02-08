@@ -8,9 +8,11 @@ export default (function header() {
     headerContainer.classList.add('headerContainer');
     header.prepend(headerContainer);
 
-    const siteTitle = document.createElement('div');
+    const siteTitleContainer = document.createElement('div');
+    const siteTitle = document.createElement('h1');
     siteTitle.classList.add('siteTitle');
-    siteTitle.innerText ="To Do Stuff"
+    siteTitle.innerText ="knot"
+    siteTitleContainer.appendChild(siteTitle);
     document.querySelector('.headerContainer').appendChild(siteTitle);
 
 
