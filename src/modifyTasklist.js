@@ -1,4 +1,3 @@
-// import todaysEvents from "./todaysEvents.js";
 import { tasklistPane } from './tasklistPane.js';
 import config from './config.js';
 import { taskList } from './projectArrays.js';
@@ -34,5 +33,22 @@ const viewProject = (unique_id) => {
   console.log(`Edit ${unique_id}`);
 };
 
+const markComplete = (unique_id) => {
 
-export { deleteTask, editTask, viewProject };
+  const taskListIndex = taskList.findIndex((obj) => {
+    if(obj.id == unique_id) {
+      return true;
+    };
+    return false;
+  });
+
+  console.log(taskList[taskListIndex])
+  taskList[taskListIndex].complete = true;
+  localStorage.setItem("taskList", JSON.stringify(taskList));
+  location.reload(); 
+
+
+};
+
+
+export { deleteTask, editTask, viewProject, markComplete };

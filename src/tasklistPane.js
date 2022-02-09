@@ -1,5 +1,5 @@
 import { today } from './projectArrays.js';
-import { deleteTask, editTask, viewProject } from './modifyTasklist.js';
+import { deleteTask, editTask, viewProject, markComplete } from './modifyTasklist.js';
 
 const tasklistPane = (list, headline) => {
 
@@ -100,7 +100,14 @@ const tasklistPane = (list, headline) => {
     viewProject.value = `${item['id']}`;
     viewProject.classList.add('viewProject');
     viewProject.innerText = "View Project";
-    buttonWrapper.append(modifyTask, deleteTask, viewProject);
+
+    // create view project button for each task
+    const markComplete = document.createElement('button');
+    markComplete.value = `${item['id']}`;
+    markComplete.classList.add('markComplete');
+    markComplete.innerText = "Mark Complete?";
+
+    buttonWrapper.append(modifyTask, deleteTask, viewProject, markComplete);
   
     document.querySelector('.taskItem').append(
       taskPriority,
@@ -135,6 +142,13 @@ const tasklistPane = (list, headline) => {
         viewProject(item.value);
       });
     });
+
+      // Modify task from taskList array
+      document.querySelectorAll(".markComplete").forEach(function(item) {
+        item.addEventListener("click", () => {
+          markComplete(item.value);
+        });
+      });
     
     
 }
