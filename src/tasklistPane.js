@@ -43,6 +43,9 @@ const tasklistPane = (list, headline) => {
 
     const taskItem = document.createElement('ul');
     taskItem.classList.add('taskItem');
+    if (item.complete === true) {
+      taskItem.classList.add('completed');
+    }
     document.getElementById('tasklistPane').prepend(taskItem);
 
     const taskPriority = document.createElement('li');
@@ -101,14 +104,20 @@ const tasklistPane = (list, headline) => {
     viewProject.classList.add('viewProject');
     viewProject.innerText = "View Project";
 
-    // create view project button for each task
-    const markComplete = document.createElement('button');
-    markComplete.value = `${item['id']}`;
-    markComplete.classList.add('markComplete');
-    markComplete.innerText = "Mark Complete?";
-
-    buttonWrapper.append(modifyTask, deleteTask, viewProject, markComplete);
-  
+    if (item.complete === true) {
+      const completed = document.createElement('button');
+      completed.classList.add('completedButton');
+      completed.innerText = "COMPLETED";
+      buttonWrapper.append(modifyTask, deleteTask, viewProject, completed);
+    } else {
+      // create view project button for each task
+      const markComplete = document.createElement('button');
+      markComplete.value = `${item['id']}`;
+      markComplete.classList.add('markComplete');
+      markComplete.innerText = "Mark Complete?";
+      buttonWrapper.append(modifyTask, deleteTask, viewProject, markComplete);
+    }
+    
     document.querySelector('.taskItem').append(
       taskPriority,
       taskTime, 

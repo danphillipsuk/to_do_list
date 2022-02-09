@@ -18,6 +18,7 @@
     --darkBlue: #333652;
     --pewter: #E9EAEC;
     --blueGrey: #90ADC6;
+    --green: rgb(60, 223, 147);
     font-family: 'Raleway', sans-serif;
   }
 
@@ -231,14 +232,16 @@ body {
  .buttonWrapper {
    flex-basis: 85%;
    margin-left: 15%;
+   display: flex;
+   margin-top: 10px;
  }
 
- .deleteTask, .modifyTask, .viewProject {
+ .deleteTask, .modifyTask, .viewProject, .markComplete {
   border: none;
   background: none;
   cursor: pointer;
   margin-right: 10px;
-  font-weight: 600;
+  font-weight: 400;
  }
  
  .deleteTask:hover, .modifyTask:hover, .viewProject:hover {
@@ -257,6 +260,30 @@ body {
  .viewProject {
    color: var(--darkBlue);
  }
+
+ .markComplete {
+  color: var(--blueGrey);
+}
+
+.completed .taskPriority,
+  .completed .taskTime,
+  .completed .taskTitle,
+  .completed .taskCatagory,
+  .completed .taskDateDue,
+  .completed .modifyTask,
+  .completed .deleteTask,
+  .completed .viewProject
+    {
+  opacity: .4;
+}
+
+.completedButton {
+  background: var(--teal);
+  color: var(--white);
+  padding: 4px 8px;
+  border: none;
+  margin-left: auto;
+}
 
  /* Mainpage left hand menu */
  #projectMenu {

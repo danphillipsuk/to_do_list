@@ -47,6 +47,7 @@ export default function createTask() {
         this.Priority = priority;
         this.DateDue = dateDue;
         this.Time = time;
+        this.complete = false;
       }
     } 
 
