@@ -1,7 +1,5 @@
 import { tasklistPane } from './tasklistPane.js';
-import config from './config.js';
-import { taskList } from './projectArrays.js';
-import { display } from './todaysEvents.js';
+import { taskList, countProjects, uniqueProjects } from './projectArrays.js';
 
 // Delete task from main taskList array
 const deleteTask = (unique_id, array) => {
@@ -29,8 +27,10 @@ const editTask = (unique_id) => {
 
 };
 
-const viewProject = (unique_id) => {
-  console.log(`Edit ${unique_id}`);
+const viewProject = (cat) => {
+  // Get array of all tasks with that catagory
+  const catagoryArray = taskList.filter(task => task.Catagory == cat);
+  tasklistPane(catagoryArray, cat);
 };
 
 const markComplete = (unique_id) => {

@@ -283,9 +283,15 @@ body {
   opacity: .3;
 }
 
+.completed .modifyTask:hover,
+.completed .deleteTask:hover,
+.completed .viewProject:hover
+  {
+opacity: 1;
+}
+
 .completedButton {
   color: var(--coral);
-  letter-spacing: .1em;
   background: none;
   border: none;
   margin-left: auto;

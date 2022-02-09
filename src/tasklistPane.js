@@ -100,7 +100,7 @@ const tasklistPane = (list, headline) => {
 
     // create view project button for each task
     const viewProject = document.createElement('button');
-    viewProject.value = `${item['id']}`;
+    viewProject.value = `${item['Catagory']}`;
     viewProject.classList.add('viewProject');
     viewProject.innerText = "View Project";
 
