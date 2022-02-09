@@ -1,5 +1,6 @@
 import { tasklistPane } from './tasklistPane.js';
-import { taskList, countProjects, uniqueProjects } from './projectArrays.js';
+import { taskList } from './projectArrays.js';
+import { modifySingleTask } from './modifySingleTask.js';
 
 // Delete task from main taskList array
 const deleteTask = (unique_id, array) => {
@@ -23,7 +24,19 @@ const deleteTask = (unique_id, array) => {
 
 // Modify task in main taskList array
 const editTask = (unique_id) => {
-  console.log(`Edit ${unique_id}`);
+
+  // find index of item to delete in master array (taskList)
+  const taskListIndex = taskList.findIndex((obj) => {
+    if(obj.id == unique_id) {
+      return true;
+    };
+    return false;
+  });
+
+  const task = taskList.filter(task => task.id == unique_id);
+
+
+  modifySingleTask(taskListIndex, task);
 
 };
 

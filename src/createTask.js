@@ -1,5 +1,3 @@
-// import todaysEvents from "./todaysEvents";
-
 export default function createTask() {
 
     // create new task form 
