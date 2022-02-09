@@ -107,7 +107,7 @@ const tasklistPane = (list, headline) => {
     if (item.complete === true) {
       const completed = document.createElement('button');
       completed.classList.add('completedButton');
-      completed.innerText = "COMPLETED";
+      completed.innerText = "Completed";
       buttonWrapper.append(modifyTask, deleteTask, viewProject, completed);
     } else {
       // create view project button for each task

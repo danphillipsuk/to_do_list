@@ -11,7 +11,7 @@ export default (function header() {
     const siteTitleContainer = document.createElement('div');
     const siteTitle = document.createElement('h1');
     siteTitle.classList.add('siteTitle');
-    siteTitle.innerText ="knot"
+    siteTitle.innerText ="whatKnot"
     siteTitleContainer.appendChild(siteTitle);
     document.querySelector('.headerContainer').appendChild(siteTitle);
 
