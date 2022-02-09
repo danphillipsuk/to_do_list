@@ -1,6 +1,9 @@
 // This module creates tabs/buttons for each catagory of tasks and allocates a dataset.name to allow taskList array filtering
 import config from './config.js';
-import { today, todaysNum, tomorrow, tomorrowsNum, countProjects,uniqueProjects, taskList } from './projectArrays.js';
+import {  today, todaysNum, todayHeadline,  
+          tomorrow, tomorrowsNum, tomorrowsHeadline, 
+          highPriority, priorityNum, highPriorityHeadline,
+          countProjects,uniqueProjects, taskList } from './projectArrays.js';
 import { tasklistPane } from './tasklistPane.js';
 
 const projectOverview = () => {
@@ -21,7 +24,7 @@ const projectOverview = () => {
     projectTab.innerHTML= `TODAY <span> ${todaysNum}</span>`;
     projectMenu.appendChild(projectTab);
     projectTab.addEventListener("click", () => {
-      tasklistPane(today);
+      tasklistPane(today, todayHeadline);
     });
   })();
 
@@ -32,7 +35,7 @@ const projectOverview = () => {
       projectTab.innerHTML= `TOMORROW <span> ${tomorrowsNum}</span>`;
       projectMenu.appendChild(projectTab);
       projectTab.addEventListener("click", () => {
-        tasklistPane(tomorrow);
+        tasklistPane(tomorrow, tomorrowsHeadline);
       });
     })();
 
@@ -49,10 +52,10 @@ const projectOverview = () => {
   (function () {
     const projectTab = document.createElement('p');
     projectTab.classList.add('urgentMenu');
-    projectTab.innerHTML= `HIGH PRIORITY <span>1</span>`;
+    projectTab.innerHTML= `HIGH PRIORITY <span>${priorityNum}</span>`;
     projectMenu.appendChild(projectTab);
     projectTab.addEventListener("click", () => {
-      tasklistPane("High Priority");
+      tasklistPane(highPriority, highPriorityHeadline);
     });
   })();
 
@@ -73,9 +76,10 @@ const projectOverview = () => {
 
   // add event listener to pass dataset name to display array and refresh dom element
   document.querySelectorAll(".projectTitle").forEach(function(item) {
+    
     item.addEventListener("click", () => {
       const project = taskList.filter(task => task.Catagory === item.dataset.name);
-      tasklistPane(project);
+      tasklistPane(project, item.dataset.name);
     });
   });
   

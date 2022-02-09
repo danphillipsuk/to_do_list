@@ -5,6 +5,7 @@ export default function createTask() {
     // create new task form 
     const taskForm = document.createElement('section');
     taskForm.classList.add('taskForm');
+    taskForm.style.visibility = 'hidden';
     taskForm.innerHTML = 
     '<h2>CREATE A NEW TASK</h2>\
     <div class="formElement taskTitle">\
@@ -21,7 +22,6 @@ export default function createTask() {
         <option value="high">High</option>\
         <option value="medium">Medium</option>\
         <option value="low" selected>Low</option>\
-        <option value="NA">N/A</option>\
         </select>\
     </div>\
     <div class="formElement">\

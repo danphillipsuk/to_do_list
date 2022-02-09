@@ -20,20 +20,17 @@ if (taskList === null) {
     let taskList = JSON.parse(localStorage.getItem('taskList'));
 };
 
-  // Delete task from taskList array
-  // document.querySelectorAll(".deleteTask").forEach(function(item) {
-  //   item.addEventListener("click", () => {
-  //     console.log("hello")
-  //     deleteTask(item.value, taskList);
-  //   });
-  // });
+const showForm = document.createElement('div');
+showForm.id = 'showForm';
+showForm.innerText = "Create +";
+document.querySelector(".headerContainer").appendChild(showForm);
 
-  //   // Modify task from taskList array
-  //   document.querySelectorAll(".modifyTask").forEach(function(item) {
-  //     item.addEventListener("click", () => {
-  //       editTask(item.value, taskList);
-  //     });
-  //   });
+showForm.addEventListener("click", () => {
+  const taskForm = document.querySelector('.taskForm');
+  taskForm.style.visibility = 'visible';
+  taskForm.style.opacity = '1';
+  taskForm.style.position = 'static';
+});
 
 
 

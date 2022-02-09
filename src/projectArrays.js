@@ -6,12 +6,19 @@ let taskList= JSON.parse(localStorage.getItem('taskList'));
 // Get array for todays date
 const today = taskList.filter(task => task.DateDue === new Date().toISOString().slice(0,10));
 const todaysNum = today.length;
+const todayHeadline = 'Today';
 
 // Get array for tomorrows date
 let todaysDate = addDays(new Date(), 1);
 let tomorrowsDate = todaysDate.toISOString().slice(0,10);
 const tomorrow = taskList.filter(task => task.DateDue === tomorrowsDate);
 const tomorrowsNum = tomorrow.length;
+const tomorrowsHeadline = 'Tomorrow';
+
+// Get array of tasks with high priority
+const highPriorityHeadline = 'High Priority';
+const highPriority = taskList.filter(task => task.Priority === 'high');
+const priorityNum = highPriority.length;
 
 // Get arrays for individual projects
 // create new array of catagory names
@@ -27,7 +34,8 @@ const countProjects = projects.reduce((acc, value) => {
 const uniqueProjects = projects.filter((i, index) => projects.indexOf(i) === index);
 
 
-export {  today, todaysNum, 
-          tomorrow, tomorrowsNum,
+export {  today, todaysNum, todayHeadline, 
+          tomorrow, tomorrowsNum, tomorrowsHeadline,
+          highPriority, priorityNum , highPriorityHeadline,
           countProjects, uniqueProjects,
           taskList }

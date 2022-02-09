@@ -1,8 +1,13 @@
 import { today } from './projectArrays.js';
 import { deleteTask, editTask, viewProject } from './modifyTasklist.js';
 
-const tasklistPane = (list) => {
+const tasklistPane = (list, headline) => {
 
+  const headLine = document.createElement('h2');
+  if (!headline) {
+    headline = 'Today';
+  }
+  headLine.innerText = `${headline}`;
   const headers = document.createElement('ul');
   headers.innerHTML = 
     '<ul id="columnHeaders">\
@@ -108,6 +113,7 @@ const tasklistPane = (list) => {
 
   })
   tasklistPane.prepend(headers);
+  tasklistPane.prepend(headLine);
 
   // Delete task from taskList array
   document.querySelectorAll(".deleteTask").forEach(function(item) {
