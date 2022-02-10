@@ -35,6 +35,42 @@ body {
     color: var(--textColor);
 }
 
+h2 {
+  font-size: 2em;
+  font-weight: 400;
+  margin-bottom: 40px;
+  color: var(--darkBlue);
+}
+
+/* Submit Button Global Style */
+
+#submit, #cancel {
+  margin-top: 20px;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: .9em;
+  font-weight: 600;
+}
+
+#submit {
+  background: var(--darkBlue);
+  color: var(--yellow);
+}
+
+#cancel {
+  background: var(--blueGrey);
+  color: var(--darkBlue);
+}
+
+#submit:hover {
+  background: var(--yellow);
+  color: var(--darkBlue);
+  transition: .4s;
+}
+
+
 .header {
     width: 100%;
     position: sticky;
@@ -43,7 +79,6 @@ body {
     box-shadow: 5px 2px 10px rgb(206, 206, 206, .4);
     z-index: 10;
 }
-
 
 .headerContainer {
     max-width: 1400px;
@@ -65,6 +100,7 @@ body {
     color: var(--white);
 }
 
+
 #showForm {
   background: var(--yellow);
   color: var(--darkBlue);
@@ -74,52 +110,66 @@ body {
   border-radius: 3px;
 }
 
+
+/* Create new task section */
 #createForm {
   max-width: 1400px;
   margin: 0 auto;
 }
 
 .taskForm {
-  position: absolute;
+  position: absolute;;
   opacity: 0;
-  max-width: 1400px;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
-  padding: 60px; 
+  padding: 40px 80px; 
   background: var(--white);
-  gap: 15px;
-  transition: .6s;
+  gap: 3%;
+  transition: .4s;
+  z-index: -1;
+}
+
+.open {
+  opacity: 1;
+  position: static;
 }
 
 .taskForm h2 {
-  color: var(--textColor);
-  font-size: 1em;
   flex-basis: 100%;
+}
+
+
+.taskForm div {
   margin-bottom: 10px;
 }
 
 .taskForm > div:nth-of-type(1) {
-  width: 30%;
+  width: 44%;
 }
 
 .taskForm > div:nth-of-type(2) {
-  width: 20%;
+  width: 25%;
 }
 
 .taskForm > div:nth-of-type(3) {
-  width: 14%;
+  width: 25%;
 }
 
 .taskForm > div:nth-of-type(4) {
-  width: 10%;
+  width: 21%;
 }
 
 .taskForm > div:nth-of-type(5) {
-  width: 10%;
+  width: 20%;
 }
 
 .taskForm > div:nth-of-type(6) {
   width: 10%;
+}
+
+.taskForm > div:nth-of-type(7) {
+  flex-basis: 100%;
 }
 
 .taskForm label {
@@ -130,25 +180,18 @@ body {
 
 .taskForm input, .taskForm select {
   width: 100%;
-    padding: 10px;
-    border-radius: 3px;
-    border: solid 1px rgb(201, 201, 201);
+  padding: 10px;
+  border-radius: 3px;
+  border: solid 1px var(--pewter);
 }
 
-.taskForm button {
-    cursor: pointer;
-    border: none;
-    height: 40px;
-    padding: 0 40px;
+.taskForm input:focus, .taskForm select:focus {
+  outline: none;
+  border: solid 2px var(--darkBlue);
 }
 
-#submit {
-    background: rgb(69, 170, 238);
-    color: #FFF;
-    font-weight: bold;
-}
-
-#tasklistPane, #modForm {
+/* Main task Display */
+#tasklistPane {
     width: 75%;
     background: var(--veryLightGrey);
     padding: 80px;
@@ -162,13 +205,6 @@ body {
   margin: 0;
   padding: 0;
   display: flex;
-}
-
-#tasklistPane h2 {
-  font-size: 2em;
-  font-weight: 400;
-  margin-bottom: 40px;
-  color: var(--darkBlue);
 }
 
 .taskItem {
@@ -391,31 +427,7 @@ opacity: 1;
 }
 
 .taskFormEdit #submit, .taskFormEdit #cancel {
-  margin-top: 20px;
-  border: none;
-  background: var(--darkBlue);
-  padding: 15px 40px;
-  border-radius: 3px;
-  cursor: pointer;
-}
-
-.taskFormEdit #submit {
-  background: var(--darkBlue);
-}
-
-.taskFormEdit #cancel {
-  margin-left: 2%;
-  background: var(--pewter);
-}
-
-#submit:hover {
-  background: var(--yellow);
-  color: var(--darkBlue);
-  transition: .4s;
-}
-
-#cancel:hover {
-  background: var(--grey);
+  margin: 20px 5px 0 0;
 }
 
 .taskFormEdit label {

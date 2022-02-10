@@ -2,15 +2,13 @@ import { taskList } from './projectArrays.js';
 import { modifyTask } from './modifyTasklist.js';
 const modifySingleTask = (index) => {
 
-  const modifyContainer = document.createElement('div');
-  modifyContainer.classList.add('modifyContainer');
   const content = document.getElementById('content');
   content.removeChild(content.childNodes[1]);    
 
   let taskFormEditTitle = document.createElement('h2');
   taskFormEditTitle.innerText = "Modify Task";
 
-
+  // Create display of task being edited
   const headers = document.createElement('ul');
   headers.innerHTML = 
     '<ul id="columnHeaders">\
@@ -57,12 +55,11 @@ const modifySingleTask = (index) => {
   const taskDateDue = document.createElement('li');
   taskDateDue.classList.add('taskDateDue');
   taskDateDue.innerText = `${taskList[index].DateDue}`;
-  
 
   const tasklistPane = document.createElement('section');
   tasklistPane.id = "tasklistPane";
 
-
+  // Create form to edit task
   let taskForm = document.createElement('div');
   taskForm.classList.add('taskFormEdit');
 
@@ -109,7 +106,6 @@ const modifySingleTask = (index) => {
   itemFourInput.append(priorityZero, priorityOne, priorityTwo, priorityThree);
   itemFour.appendChild(itemFourInput);
 
-
   const itemFive = document.createElement('div');
   itemFive.innerHTML = '<label for="date">Due Date</label>';
   const itemFiveInput = document.createElement('input');
@@ -147,16 +143,14 @@ const modifySingleTask = (index) => {
     taskDateDue,
     );
   
-
   tasklistPane.append(taskFormEditTitle)
   tasklistPane.append(headers);
   tasklistPane.append(taskItem);
   tasklistPane.append(taskForm);
 
   content.append(tasklistPane);
-
-
-
+  
+  // action update function on submit
   itemSevenSubmit.addEventListener("click", () => {
     const task = document.querySelector("input[name='task']").value;
     const projectTitle = document.querySelector("input[name='projectTitle']").value;
@@ -168,4 +162,5 @@ const modifySingleTask = (index) => {
   });
 
 }
+
 export { modifySingleTask }

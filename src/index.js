@@ -30,10 +30,15 @@ document.querySelector(".headerContainer").appendChild(showForm);
 
 showForm.addEventListener("click", () => {
   const taskForm = document.querySelector('.taskForm');
-  taskForm.style.visibility = 'visible';
-  taskForm.style.opacity = '1';
-  taskForm.style.position = 'static';
+  taskForm.classList.add('open');
 });
+
+const pcancel = document.querySelector('.hiddenCancel');
+    pcancel.addEventListener("click", () => {
+      const taskForm = document.querySelector('.taskForm');
+      taskForm.classList.remove('open');
+    });
+
 
 
 

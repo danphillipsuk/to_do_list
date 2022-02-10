@@ -4,14 +4,13 @@ export default function createTask() {
     const formWrapper = document.getElementById("createForm");
     const taskForm = document.createElement('section');
     taskForm.classList.add('taskForm');
-    formWrapper.style.visibility = 'hidden';
     taskForm.innerHTML = 
-    '<h2>CREATE A NEW TASK</h2>\
-    <div class="formElement taskTitle">\
+    '<h2>Create a new task</h2>\
+    <div>\
       <label for="taskTitle">Task</label><input name ="taskTitle" type="text">\
     </div>\
     <div class="formElement">\
-      <label for="taskCatagory">Project</label><input name="taskCatagory" type="text">\
+      <label for="taskCatagory">Project Title</label><input name="taskCatagory" type="text">\
     </div>\
     <div class="formElement">\
       <label for="subCatagory">Sub Catagory</label><input name="subCatagory" type="text">\
@@ -27,9 +26,11 @@ export default function createTask() {
       <label for="dueDate">Due Date</label><input type="date" name="dueDate">\
     </div>\
     <div class="formElement">\
-      <label for="taskTime">Time</label><input type="time" name="time">\
-    </div>\
-    <button id="submit">Add Task</button>';
+      <label for="taskTime">Time</label><input type="time" name="time"></div>\
+    <div class="formElement">\
+    <button id="submit">Create Task</button>\
+    <button id="cancel" class="hiddenCancel">Cancel</button>\
+    </div>';
 
     document.getElementById("createForm").appendChild(taskForm);
 

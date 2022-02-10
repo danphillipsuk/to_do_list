@@ -59,8 +59,6 @@ const markComplete = (unique_id) => {
   taskList[taskListIndex].complete = true;
   localStorage.setItem("taskList", JSON.stringify(taskList));
   location.reload(); 
-
-
 };
 
 const modifyTask = (index, task, projectTitle, subCatagory, priority, dueDate, time) => {
@@ -88,7 +86,6 @@ const modifyTask = (index, task, projectTitle, subCatagory, priority, dueDate, t
 
   localStorage.setItem("taskList", JSON.stringify(taskList));
   location.reload(); 
-
 };
 
 
