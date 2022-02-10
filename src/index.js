@@ -19,7 +19,7 @@ let taskList;
 tasklist = JSON.parse(localStorage.getItem('taskList'));
 
 
-if (taskList === null) {
+if (taskList == null) {
     const taskListcreate = [{Title: "Test Task", Catagory: "Home", DateDue: "2023-01-01"}];
     localStorage.setItem("taskList", JSON.stringify(taskListcreate));
     let taskList = JSON.parse(localStorage.getItem('taskList'));
