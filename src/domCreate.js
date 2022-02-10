@@ -1,9 +1,7 @@
-const createForm = () => {
-
 // create new task form 
-let taskForm = document.createElement('section');
-taskForm.classList.add('taskForm');
-taskForm.innerHTML = 
+let modForm = document.createElement('div');
+modForm.classList.add('modForm');
+modForm.innerHTML = 
 '<h2>CREATE A NEW TASK</h2>\
   <div class="formElement taskTitle">\
     <label for="taskTitle">Task</label><input name ="taskTitle" type="text">\
@@ -27,9 +25,5 @@ taskForm.innerHTML =
   </div>\
   <button id="submit">Add Task</button>';
 
-document.getElementById("content").append(taskForm);
-
-};
-
-export { createForm };
+export { modForm };
 

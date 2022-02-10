@@ -35,15 +35,15 @@ const projectOverview = () => {
       });
     })();
 
-  (function () {
-      const projectTab = document.createElement('p');
-      projectTab.classList.add('sevenDayMenu');
-      projectTab.innerHTML= `NEXT 7 DAYS <span>3</span>`;
-      projectMenu.appendChild(projectTab);
-      projectTab.addEventListener("click", () => {
-        tasklistPane("hell0 from next seven days");
-      });
-  })();
+  // (function () {
+  //     const projectTab = document.createElement('p');
+  //     projectTab.classList.add('sevenDayMenu');
+  //     projectTab.innerHTML= `NEXT 7 DAYS <span>3</span>`;
+  //     projectMenu.appendChild(projectTab);
+  //     projectTab.addEventListener("click", () => {
+  //       tasklistPane("hell0 from next seven days");
+  //     });
+  // })();
 
   (function () {
     const projectTab = document.createElement('p');

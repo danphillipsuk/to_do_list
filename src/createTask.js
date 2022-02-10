@@ -1,9 +1,10 @@
 export default function createTask() {
 
     // create new task form 
+    const formWrapper = document.getElementById("createForm");
     const taskForm = document.createElement('section');
     taskForm.classList.add('taskForm');
-    taskForm.style.visibility = 'hidden';
+    formWrapper.style.visibility = 'hidden';
     taskForm.innerHTML = 
     '<h2>CREATE A NEW TASK</h2>\
     <div class="formElement taskTitle">\

@@ -88,7 +88,7 @@ body {
   padding: 60px; 
   background: var(--white);
   gap: 15px;
-  transition: 1s;
+  transition: .6s;
 }
 
 .taskForm h2 {
@@ -148,7 +148,7 @@ body {
     font-weight: bold;
 }
 
-#tasklistPane {
+#tasklistPane, #modForm {
     width: 75%;
     background: var(--veryLightGrey);
     padding: 80px;
@@ -261,6 +261,8 @@ body {
  
  .modifyTask {
    color: var(--teal);
+   text-decoration: none;
+   font-size: .8em;
  }
  
  .viewProject {
@@ -337,7 +339,6 @@ opacity: 1;
 #projectMenu p:hover {
   transition: .3s;
   background: var(--veryLightGrey);
-
 }
 
 #projectTabContainer {
@@ -352,7 +353,7 @@ opacity: 1;
 
 #projectTabContainer p span {
   background: var(--darkBlue);
-  color: var(--yellow);
+  color: var(--yellow);  text-align: center;
 }
 
 
@@ -371,3 +372,80 @@ opacity: 1;
   color: var(--white);
 }
 
+/* Modify Task Form */
+#modForm {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.taskItem {
+  width: 100%;
+  display: flex;
+}
+
+.taskFormEdit {
+  width: 100%;
+  margin: 30px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3%;
+}
+
+.taskFormEdit div{
+  margin-bottom: 15px;
+}
+
+.taskFormEdit #submit {
+  margin-top: 20px;
+  border: none;
+  background: var(--darkBlue);
+  padding: 15px 40px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#submit:hover {
+  background: var(--yellow);
+  color: var(--darkBlue);
+  transition: .4s;
+}
+
+.taskFormEdit label {
+  font-size: .8em;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.taskFormEdit input, .taskFormEdit select {
+  padding: 10px;
+  width: 100%;
+}
+
+.taskFormEdit > div:first-child {
+  width: 100%;
+}
+
+.taskFormEdit > div:nth-of-type(2) {
+  width: 57%;
+}
+
+.taskFormEdit > div:nth-of-type(3) {
+  width: 40%;
+}
+
+.taskFormEdit > div:nth-of-type(4) {
+  width: 15%;
+}
+
+.taskFormEdit > div:nth-of-type(5) {
+  width: 25%;
+}
+
+.taskFormEdit > div:nth-of-type(6) {
+  width: 10%;
+}
+
+.taskFormEdit > div:nth-of-type(7) {
+  flex-basis: 100%;
+}
