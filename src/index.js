@@ -14,7 +14,9 @@ createTask();
 // localStorage.setItem("taskList", JSON.stringify(taskList));
 
 // Get taskList from localStorage or create it if not found (first time visitor)
-let taskList= JSON.parse(localStorage.getItem('taskList'));
+let taskList;
+ 
+tasklist = JSON.parse(localStorage.getItem('taskList'));
 
 
 if (taskList === null) {
