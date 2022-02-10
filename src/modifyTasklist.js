@@ -63,5 +63,33 @@ const markComplete = (unique_id) => {
 
 };
 
+const modifyTask = (index, task, projectTitle, subCatagory, priority, dueDate, time) => {
 
-export { deleteTask, editTask, viewProject, markComplete };
+  console.log(index, task, projectTitle, subCatagory, priority, dueDate, time);
+  console.log(taskList[index])
+  if (task) {
+    taskList[index].Title = task;
+  }
+  if (projectTitle) {
+    taskList[index].Catagory = projectTitle;
+  }
+  if (subCatagory) {
+    taskList[index].subCatagory = subCatagory;
+  }
+  if (priority) {
+    taskList[index].Priority = priority;
+  }
+  if (dueDate) {
+    taskList[index].DateDue = dueDate;
+  }
+  if (time) {
+    taskList[index].Time = time;
+  }
+
+  localStorage.setItem("taskList", JSON.stringify(taskList));
+  location.reload(); 
+
+};
+
+
+export { deleteTask, editTask, viewProject, markComplete, modifyTask };

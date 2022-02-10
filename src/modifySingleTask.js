@@ -1,7 +1,6 @@
 import { taskList } from './projectArrays.js';
-const modifySingleTask = (index, object) => {
-
-  console.log(taskList[index].Title, object)
+import { modifyTask } from './modifyTasklist.js';
+const modifySingleTask = (index) => {
 
   const modifyContainer = document.createElement('div');
   modifyContainer.classList.add('modifyContainer');
@@ -68,53 +67,53 @@ const modifySingleTask = (index, object) => {
   taskForm.classList.add('taskFormEdit');
 
   const itemOne = document.createElement('div');
-  itemOne.innerHTML = '<label for="taskTitle">Task</label>';
+  itemOne.innerHTML = '<label for="task">Task</label>';
   const itemOneInput = document.createElement('input');
-  itemOneInput.name = 'taskTitle';
+  itemOneInput.name = 'task';
   itemOneInput.type = 'text';
   itemOne.appendChild(itemOneInput);
 
   const itemTwo = document.createElement('div');
-  itemTwo.innerHTML = '<label for="taskCatagory">Project Title</label>';
+  itemTwo.innerHTML = '<label for="projectTitle">Project Title</label>';
   const itemTwoInput = document.createElement('input');
-  itemTwoInput.name = 'taskCatagory';
+  itemTwoInput.name = 'projectTitle';
   itemTwoInput.type = 'text';
   itemTwo.appendChild(itemTwoInput);
 
   const itemThree = document.createElement('div');
-  itemThree.innerHTML = '<label for="subCatagory">Sub Catagory</label>';
+  itemThree.innerHTML = '<label for="catagory">Sub Catagory</label>';
   const itemThreeInput = document.createElement('input');
-  itemThreeInput.name = 'subCatagory';
+  itemThreeInput.name = 'catagory';
   itemThreeInput.type = 'text';
   itemThree.appendChild(itemThreeInput);
 
   const itemFour = document.createElement('div');
   itemFour.innerHTML = '<label for="priority">Priority</label>';
   const itemFourInput = document.createElement('select');
-  itemFourInput.name = 'priority';
-  
+  itemFourInput.name = 'priority1';
+
+  const priorityZero = document.createElement('option');
 
   const priorityOne = document.createElement('option');
   priorityOne.value = 'low';
   priorityOne.text = 'Low';
-  priorityOne.selected = true;
 
   const priorityTwo = document.createElement('option');
   priorityTwo.value = 'medium';
   priorityTwo.text = 'Medium';
 
   const priorityThree = document.createElement('option');
-  priorityThree .value = 'high';
-  priorityThree .text = 'High';
+  priorityThree.value = 'high';
+  priorityThree.text = 'High';
 
-  itemFourInput.append(priorityOne, priorityTwo, priorityThree);
+  itemFourInput.append(priorityZero, priorityOne, priorityTwo, priorityThree);
   itemFour.appendChild(itemFourInput);
 
 
   const itemFive = document.createElement('div');
-  itemFive.innerHTML = '<label for="dueDate">Due Date</label>';
+  itemFive.innerHTML = '<label for="date">Due Date</label>';
   const itemFiveInput = document.createElement('input');
-  itemFiveInput.name = 'dueDate';
+  itemFiveInput.name = 'date';
   itemFiveInput.type = 'date';
   itemFive.appendChild(itemFiveInput);
 
@@ -156,6 +155,17 @@ const modifySingleTask = (index, object) => {
 
   content.append(tasklistPane);
 
-}
 
+
+  itemSevenSubmit.addEventListener("click", () => {
+    const task = document.querySelector("input[name='task']").value;
+    const projectTitle = document.querySelector("input[name='projectTitle']").value;
+    const subCatagory = document.querySelector("input[name='catagory']").value;
+    const priority = document.querySelector("select[name='priority1']").value;
+    const dueDate = document.querySelector("input[name='date']").value;
+    const time = document.querySelector("input[name='taskTime']").value;
+    modifyTask(index, task, projectTitle, subCatagory, priority, dueDate, time);
+  });
+
+}
 export { modifySingleTask }
