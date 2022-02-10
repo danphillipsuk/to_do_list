@@ -5,13 +5,15 @@ import { projectOverview } from './projectOverview.js';
 import { tasklistPane } from './tasklistPane.js';
 import createTask from './createTask.js';
 
-let taskList= JSON.parse(localStorage.getItem('taskList'));
+let taskList;
+
+taskList = JSON.parse(localStorage.getItem('taskList'));
 
 
 if (taskList === null) {
     const taskListcreate = [{Title: "Test Task", Catagory: "Home", DateDue: "2023-01-01"}];
     localStorage.setItem("taskList", JSON.stringify(taskListcreate));
-    let taskList = JSON.parse(localStorage.getItem('taskList'));
+    taskList = JSON.parse(localStorage.getItem('taskList'));
 };
 
 
