@@ -373,12 +373,6 @@ opacity: 1;
 }
 
 /* Modify Task Form */
-#modForm {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-}
-
 .taskItem {
   width: 100%;
   display: flex;
@@ -389,14 +383,14 @@ opacity: 1;
   margin: 30px 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 3%;
+  gap: 2%;
 }
 
 .taskFormEdit div{
   margin-bottom: 15px;
 }
 
-.taskFormEdit #submit {
+.taskFormEdit #submit, .taskFormEdit #cancel {
   margin-top: 20px;
   border: none;
   background: var(--darkBlue);
@@ -405,11 +399,25 @@ opacity: 1;
   cursor: pointer;
 }
 
+.taskFormEdit #submit {
+  background: var(--darkBlue);
+}
+
+.taskFormEdit #cancel {
+  margin-left: 2%;
+  background: var(--pewter);
+}
+
 #submit:hover {
   background: var(--yellow);
   color: var(--darkBlue);
   transition: .4s;
 }
+
+#cancel:hover {
+  background: var(--grey);
+}
+
 
 .taskFormEdit label {
   font-size: .8em;

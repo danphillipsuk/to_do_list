@@ -75,7 +75,7 @@ const modifySingleTask = (index, object) => {
   itemOne.appendChild(itemOneInput);
 
   const itemTwo = document.createElement('div');
-  itemTwo.innerHTML = '<label for="taskCatagory">Project</label>';
+  itemTwo.innerHTML = '<label for="taskCatagory">Project Title</label>';
   const itemTwoInput = document.createElement('input');
   itemTwoInput.name = 'taskCatagory';
   itemTwoInput.type = 'text';
@@ -126,7 +126,15 @@ const modifySingleTask = (index, object) => {
   itemSix.appendChild(itemSixInput);
 
   const itemSeven = document.createElement('div');
-  itemSeven.innerHTML = '<button id="submit">Update Task</button>';
+  const itemSevenSubmit = document.createElement('button');
+  itemSevenSubmit.id = 'submit';
+  itemSevenSubmit.innerText = 'Update Task';
+
+  const itemSevenCancel = document.createElement('button');
+  itemSevenCancel.id = 'cancel';
+  itemSevenCancel.innerText = 'Cancel';
+
+  itemSeven.append(itemSevenSubmit, itemSevenCancel);
 
   taskForm.append(
     itemOne, itemTwo, itemThree, itemFour, itemFive, itemSix, itemSeven
@@ -149,6 +157,5 @@ const modifySingleTask = (index, object) => {
   content.append(tasklistPane);
 
 }
-
 
 export { modifySingleTask }
