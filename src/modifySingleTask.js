@@ -161,6 +161,8 @@ const modifySingleTask = (index) => {
     modifyTask(index, task, projectTitle, subCatagory, priority, dueDate, time);
   });
 
+
+  
 }
 
 export { modifySingleTask }
