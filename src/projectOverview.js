@@ -1,8 +1,9 @@
 // This module creates tabs/buttons for each catagory of tasks and allocates a dataset.name to allow taskList array filtering
+import { taskList } from "./defineTasklist.js";
 import {  today, todaysNum, todayHeadline,  
           tomorrow, tomorrowsNum, tomorrowsHeadline, 
           highPriority, priorityNum, highPriorityHeadline,
-          countProjects,uniqueProjects, taskList } from './projectArrays.js';
+          countProjects,uniqueProjects } from './projectArrays.js';
 import { tasklistPane } from './tasklistPane.js';
 
 const projectOverview = () => {

@@ -1,20 +1,21 @@
 import _ from 'lodash';
 import './style.css';
+import { taskList } from "./defineTasklist.js";
 import header from './header.js';
 import { projectOverview } from './projectOverview.js';
 import { tasklistPane } from './tasklistPane.js';
 import createTask from './createTask.js';
 
-let taskList;
+// let taskList;
 
-taskList = JSON.parse(localStorage.getItem('taskList'));
+// taskList = JSON.parse(localStorage.getItem('taskList'));
 
 
-if (taskList === null) {
-    const taskListcreate = [{Title: "Test Task", Catagory: "Home", DateDue: "2023-01-01"}];
-    localStorage.setItem("taskList", JSON.stringify(taskListcreate));
-    taskList = JSON.parse(localStorage.getItem('taskList'));
-};
+// if (taskList === null) {
+//     const taskListcreate = [{Title: "Test Task", Catagory: "Home", DateDue: "2023-01-01"}];
+//     localStorage.setItem("taskList", JSON.stringify(taskListcreate));
+//     taskList = JSON.parse(localStorage.getItem('taskList'));
+// };
 
 
 projectOverview();

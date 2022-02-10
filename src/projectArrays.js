@@ -1,7 +1,7 @@
-import addDays from 'date-fns/addDays'
-
+import addDays from 'date-fns/addDays';
+import { taskList } from "./defineTasklist.js";
 // Get master task array
-let taskList= JSON.parse(localStorage.getItem('taskList'));
+
 
 // Get array for todays date
 const today = taskList.filter(task => task.DateDue === new Date().toISOString().slice(0,10));

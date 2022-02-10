@@ -1,5 +1,5 @@
 import { tasklistPane } from './tasklistPane.js';
-import { taskList } from './projectArrays.js';
+import { taskList } from "./defineTasklist.js";
 import { modifySingleTask } from './modifySingleTask.js';
 
 // Delete task from main taskList array

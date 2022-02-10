@@ -1,4 +1,4 @@
-import { taskList } from './projectArrays.js';
+import { taskList } from "./defineTasklist.js";
 import { modifyTask } from './modifyTasklist.js';
 const modifySingleTask = (index) => {
 
@@ -162,7 +162,7 @@ const modifySingleTask = (index) => {
   });
 
 
-  
+
 }
 
 export { modifySingleTask }
