@@ -1,7 +1,7 @@
-
 import { today } from './projectArrays.js';
 import { taskList } from "./defineTasklist.js";
 import { deleteTask, editTask, viewProject, markComplete } from './modifyTasklist.js';
+import format from 'date-fns/format';
 
 const tasklistPane = (list, headline) => {
 
@@ -14,10 +14,9 @@ const tasklistPane = (list, headline) => {
   headers.innerHTML = 
     '<ul id="columnHeaders">\
       <li>Priority</li>\
-      <li>Time</li>\
       <li>Task</li>\
       <li>Project</li>\
-      <li>Day Due</li>\
+      <li>Deadline</li>\
     </ul>';
     
   
@@ -39,6 +38,25 @@ const tasklistPane = (list, headline) => {
   }
 
   displayArray.forEach((item, index) => {
+    
+    // get todays date, task date, format and compare for display
+    let today = new Date();
+    let date = new Date(item.DateDue);
+    const todaysDate = format(today, 'EEEE do LLLL yyyy');
+    const taskDate = format(date, 'EEEE do LLLL yyyy');
+  
+    let thisYear = today.getFullYear();
+    let taskYear = date.getFullYear();
+
+    let itemDate; 
+    if (todaysDate === taskDate) { 
+      itemDate = 'Due Today';
+    } else if (thisYear === taskYear) {
+      itemDate = format(date, 'EEEE do LLLL');
+    } else {
+      itemDate = format(date, 'EEEE do LLLL yyyy');
+    }
+
 
     const taskItem = document.createElement('ul');
     taskItem.classList.add('taskItem');
@@ -65,10 +83,6 @@ const tasklistPane = (list, headline) => {
     }
     taskPriority.append(taskPriorityInner);
 
-    const taskTime = document.createElement('li');
-    taskTime.classList.add('taskTime');
-    taskTime.innerText = `${item.Time}`;
-
     const taskTitle = document.createElement('li');
     taskTitle.classList.add('taskTitle');
     taskTitle.innerText = `${item.Title}`;
@@ -76,10 +90,20 @@ const tasklistPane = (list, headline) => {
     const taskCatagory = document.createElement('li');
     taskCatagory.classList.add('taskCatagory');
     taskCatagory.innerText = `${item.Catagory}`;
+    if (item.subCatagory !== '') { 
+      const catagorySpan = document.createElement('span');
+      catagorySpan.innerText = `${item.subCatagory}`;
+      taskCatagory.appendChild(catagorySpan);
+    }
 
-    const taskDateDue = document.createElement('li');
-    taskDateDue.classList.add('taskDateDue');
-    taskDateDue.innerText = `${item.DateDue}`;
+    const deadline = document.createElement('li');
+    deadline.classList.add('deadline');
+    deadline.innerText = `${itemDate}`;
+    if (item.Time !== '') { 
+      const timeSpan = document.createElement('span');
+      timeSpan.innerText = `${item.Time}`;
+      deadline.appendChild(timeSpan);
+    }
 
     // create container for buttons
     const buttonWrapper = document.createElement('div');
@@ -119,10 +143,9 @@ const tasklistPane = (list, headline) => {
     
     document.querySelector('.taskItem').append(
       taskPriority,
-      taskTime, 
       taskTitle,
       taskCatagory,
-      taskDateDue,
+      deadline,
       buttonWrapper
       );
 
