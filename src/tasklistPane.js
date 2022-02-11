@@ -30,9 +30,6 @@ const tasklistPane = (list, headline) => {
   tasklistPane.prepend(headers);
   content.removeChild(content.childNodes[1]);
 
-
-  
-
   let displayArray;
 
   if (!list) {

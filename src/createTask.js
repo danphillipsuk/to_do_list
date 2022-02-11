@@ -30,7 +30,7 @@ export default function createTask() {
       <label for="taskTime">Time</label><input type="time" name="time"></div>\
     <div class="formElement">\
     <button id="submit">Create Task</button>\
-    <button id="cancel" class="hiddenCancel">Cancel</button>\
+    <button id="cancel" class="hiddenCancel" data-name="hiddenCancel">Cancel</button>\
     </div>';
 
     document.getElementById("createForm").appendChild(taskForm);

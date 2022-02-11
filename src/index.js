@@ -6,26 +6,9 @@ import { projectOverview } from './projectOverview.js';
 import { tasklistPane } from './tasklistPane.js';
 import createTask from './createTask.js';
 
-// let taskList;
-
-// taskList = JSON.parse(localStorage.getItem('taskList'));
-
-
-// if (taskList === null) {
-//     const taskListcreate = [{Title: "Test Task", Catagory: "Home", DateDue: "2023-01-01"}];
-//     localStorage.setItem("taskList", JSON.stringify(taskListcreate));
-//     taskList = JSON.parse(localStorage.getItem('taskList'));
-// };
-
-
 projectOverview();
 tasklistPane()
 createTask();
-
-// let taskList = [];
-// localStorage.setItem("taskList", JSON.stringify(taskList));
-
-// Get taskList from localStorage or create it if not found (first time visitor)
 
 const showForm = document.createElement('div');
 showForm.id = 'showForm';
@@ -38,10 +21,22 @@ showForm.addEventListener("click", () => {
 });
 
 const pcancel = document.querySelector('.hiddenCancel');
-    pcancel.addEventListener("click", () => {
-      const taskForm = document.querySelector('.taskForm');
-      taskForm.classList.remove('open');
-    });
+pcancel.addEventListener("click", () => {
+  const taskForm = document.querySelector('.taskForm');
+  taskForm.classList.remove('open');
+});
+
+const editForm = document.querySelector('[data-name="hiddenCancel"]');
+editForm.addEventListener("click", () => {
+  console.log("hellodan")
+  // const task = document.querySelector("input[name='task']").value;
+  // const projectTitle = document.querySelector("input[name='projectTitle']").value;
+  // const subCatagory = document.querySelector("input[name='catagory']").value;
+  // const priority = document.querySelector("select[name='priority1']").value;
+  // const dueDate = document.querySelector("input[name='date']").value;
+  // const time = document.querySelector("input[name='taskTime']").value;
+  // modifyTask(index, task, projectTitle, subCatagory, priority, dueDate, time);
+});
 
 
 
