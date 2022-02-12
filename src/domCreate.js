@@ -1,12 +1,16 @@
 import { taskList } from "./defineTasklist.js";
 import format from 'date-fns/format';
 import { arrayLists } from "./updateDelete.js";
+import { eventSelect } from "./eventListeners.js";
 
 export default (function domCreate () {
 
   // get main content container from DOM
   const content = document.getElementById('content');
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Create Header
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   (function createHeader () {
 
     const header = document.createElement('header');
@@ -37,42 +41,103 @@ export default (function domCreate () {
     
   })();
 
-  // taskCreate form
-  const formWrapper = document.getElementById("createForm");
-  const taskForm = document.createElement('section');
-  taskForm.classList.add('taskForm');
-  taskForm.innerHTML = 
-  '<h2>Create a new task</h2>\
-  <div>\
-    <label for="taskTitle">Task</label><input name ="taskTitle" type="text">\
-  </div>\
-  <div class="formElement">\
-    <label for="taskCatagory">Project Title</label><input name="taskCatagory" type="text">\
-  </div>\
-  <div class="formElement">\
-    <label for="subCatagory">Sub Catagory</label><input name="subCatagory" type="text">\
-  </div>\
-  <div class="formElement">\
-    <label for="priority">Priority</label><select name ="priority">\
-      <option value="high">High</option>\
-      <option value="medium">Medium</option>\
-      <option value="low" selected>Low</option>\
-      </select>\
-  </div>\
-  <div class="formElement">\
-    <label for="dueDate">Due Date</label><input type="date" name="dueDate">\
-  </div>\
-  <div class="formElement">\
-    <label for="taskTime">Time</label><input type="time" name="time"></div>\
-  <div class="formElement">\
-  <button id="submit">Create Task</button>\
-  <button id="cancel" class="hiddenCancel" data-name="hiddenCancel">Cancel</button>\
-  </div>';
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Create New Task Form
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  (function createNewTaskForm () {
+    
+    const taskForm = document.createElement('section');
+    taskForm.classList.add('taskForm');
 
-  document.getElementById("createForm").appendChild(taskForm);
+    const taskFormHeadline = document.createElement('h2');
+    taskFormHeadline.innerText = "Create a new task";
+
+    const taskFormElementTitle = document.createElement('div');
+    taskFormElementTitle.innerHTML = '<label for="createTaskTitle">Task</label>';
+    const taskFormTitleInput = document.createElement('input');
+    taskFormTitleInput.name = 'createTaskTitle';
+    taskFormTitleInput.type = 'text';
+    taskFormElementTitle.append(taskFormTitleInput);
+    
+    const taskFormElementProject = document.createElement('div');
+    taskFormElementProject.innerHTML = '<label for="taskCatagory">Project Title</label>';
+    const taskFormProjectInput = document.createElement('input');
+    taskFormProjectInput.name = 'taskCatagory';
+    taskFormProjectInput.type = 'text';
+    taskFormElementProject.append(taskFormProjectInput);
+
+    const taskFormElementSubCat = document.createElement('div');
+    taskFormElementSubCat.innerHTML = '<label for="subCatagory">Sub Catagory</label>';
+    const taskFormSubCatInput = document.createElement('input');
+    taskFormSubCatInput.name = 'subCatagory';
+    taskFormSubCatInput.type = 'text';
+    taskFormElementSubCat.append(taskFormSubCatInput);
+
+    const taskFormElementPriority = document.createElement('div');
+    taskFormElementPriority.innerHTML = '<label for="priority">Priority</label>';
+    const taskFormPriorityInput = document.createElement('select');
+    taskFormPriorityInput.name = 'priority';
+
+    const priorityOne = document.createElement('option');
+    priorityOne.value = 'low';
+    priorityOne.text = 'Low';
+
+    const priorityTwo = document.createElement('option');
+    priorityTwo.value = 'medium';
+    priorityTwo.text = 'Medium';
+
+    const priorityThree = document.createElement('option');
+    priorityThree.value = 'high';
+    priorityThree.text = 'High';
+
+    taskFormPriorityInput.append(priorityOne, priorityTwo, priorityThree);
+    taskFormElementPriority.append(taskFormPriorityInput);
+
+    const taskFormElementDate = document.createElement('div');
+    taskFormElementDate.innerHTML = '<label for="dueDate">Date</label>';
+    const taskFormDateInput = document.createElement('input');
+    taskFormDateInput.name = 'dueDate';
+    taskFormDateInput.type = 'date';
+    taskFormElementDate.append(taskFormDateInput);
+
+    const taskFormElementTime = document.createElement('div');
+    taskFormElementTime.innerHTML = '<label for="time">Time</label>';
+    const taskFormTimeInput = document.createElement('input');
+    taskFormTimeInput.name = 'time';
+    taskFormTimeInput.type = 'time';
+    taskFormElementTime.append(taskFormTimeInput);
+
+    const taskFormElementSubmit = document.createElement('div');
+    const taskFormElementSubmitButton = document.createElement('button');
+    const taskFormElementCancelButton = document.createElement('button');
+
+    taskFormElementSubmitButton.id = 'submit';
+    taskFormElementSubmitButton.innerText = 'Create Task';
+    taskFormElementSubmitButton.dataset.name = 'submit';
+
+    taskFormElementCancelButton.id = 'cancel';
+    taskFormElementCancelButton.dataset.name = 'cancel';
+    taskFormElementCancelButton.innerText = 'Cancel';
+
+    taskFormElementSubmit.append(taskFormElementSubmitButton, taskFormElementCancelButton);
+
+    taskForm.append(
+      taskFormHeadline, 
+      taskFormElementTitle, 
+      taskFormElementProject, 
+      taskFormElementSubCat, 
+      taskFormElementPriority, 
+      taskFormElementDate, 
+      taskFormElementTime,
+      taskFormElementSubmit
+    );
+
+    document.getElementById("createForm").appendChild(taskForm);
+    
+  })();
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // Side Menu / Tab Menu 
+  // Create Side Menu / Tab Menu
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   (function createSideMenu () {
   
@@ -115,7 +180,7 @@ export default (function domCreate () {
 // Main Tasklist Window / List
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const tasklistDisplay = (list, headline) => {
-  
+
   const content = document.getElementById('content');
 
 
@@ -125,6 +190,7 @@ const tasklistDisplay = (list, headline) => {
   }
   headLine.innerText = `${headline}`;
 
+  // Create headers for task pane
   const headers = document.createElement('ul');
   headers.innerHTML = 
     '<ul id="columnHeaders">\
@@ -262,10 +328,15 @@ const tasklistDisplay = (list, headline) => {
       deadline,
       buttonWrapper
     );
-
   })
-tasklistPane.prepend(headers);
-tasklistPane.prepend(headLine);
+
+  tasklistPane.prepend(headers);
+  tasklistPane.prepend(headLine);
+
+  // Call event listeners for the modify/delete/view/complete functions
+  eventSelect();
+
 };
+
 
 export { tasklistDisplay }

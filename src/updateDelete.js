@@ -45,6 +45,49 @@ const arrayLists = (() => {
 
 })();
 
+const createTask = () => {
+
+  console.log('create')
+
+    //       constructor(id, title, catagory, subCatagory, priority, dateDue, time) {
+    //         this.id = id;
+    //         this.Title = title;
+    //         this.Catagory = catagory;
+    //         this.subCatagory = subCatagory;
+    //         this.Priority = priority;
+    //         this.DateDue = dateDue;
+    //         this.Time = time;
+    //         this.complete = false;
+    //       }
+    //     } 
+    
+    //     //function to run on taskForm submit
+    //     function newTask () {
+          const title = document.querySelector("input[name='createTaskTitle']").value;
+          const catagory = document.querySelector("input[name='taskCatagory']").value;
+          const subcatagory = document.querySelector("input[name='subCatagory']").value;
+          const priority = document.querySelector("select[name='priority']").value;
+          const dueDate = document.querySelector("input[name='dueDate']").value;
+          const time = document.querySelector("input[name='time']").value;
+
+          console.log(title)
+            
+    //       if (title !== '' && dueDate !== '') {
+    //         const id = Math.random();
+            
+    //         // Create a new task object
+    //         const newAddition = new taskClass(id, title, catagory, subcatagory, priority, dueDate, time);
+    
+    //         // add new task to taskList array and set in localStorage
+    //         const taskList = JSON.parse(window.localStorage.getItem("taskList"));
+    //         taskList.push(newAddition);
+    //         window.localStorage.setItem("taskList", JSON.stringify(taskList));
+    //         location.reload(); 
+    
+    //       }
+    //     }
+}
 
 
-export {  arrayLists }
+
+export {  arrayLists, createTask }

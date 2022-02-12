@@ -1,5 +1,5 @@
 import { taskList } from "./defineTasklist.js";
-import { arrayLists } from "./updateDelete.js";
+import { arrayLists, createTask } from "./updateDelete.js";
 import { tasklistDisplay } from './domCreate.js';
 
 
@@ -11,9 +11,13 @@ const eventSelect = () => {
     taskForm.classList.add('open');
   });
 
-  document.querySelector('[data-name="hiddenCancel"]').addEventListener("click", () => {
+  document.querySelector('[data-name="cancel"]').addEventListener("click", () => {
     const taskForm = document.querySelector('.taskForm');
     taskForm.classList.remove('open');
+  });
+
+  document.querySelector('[data-name="submit"]').addEventListener("click", () => {
+    createTask();
   });
 
   // Delete task from taskList array
@@ -47,9 +51,9 @@ const eventSelect = () => {
       console.log('complete')
     });
   });
-  
+
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // Event listeners for tabs in side menu////////////////////////
+  // Event listeners for tabs in side menu ////////////////////////
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   const todayTab = document.querySelector('.todayMenu');
   todayTab.addEventListener("click", () => {
