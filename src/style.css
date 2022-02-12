@@ -20,6 +20,7 @@
     --blueGrey: #90ADC6;
     --green: rgb(60, 223, 147);
     font-family: 'Raleway', sans-serif;
+    --maxWidth: 1600px;
   }
 
 body {
@@ -29,7 +30,7 @@ body {
 }
 
 #content {
-    max-width: 1400px;
+    max-width: var(--maxWidth);
     margin: 0 auto;
     display: flex;
     height: 90vh;
@@ -82,13 +83,13 @@ h2 {
 }
 
 .headerContainer {
-  max-width: 1400px;
+  max-width: var(--maxWidth);
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 10px 20px;
 }
 
 .header h1 {
@@ -97,9 +98,7 @@ h2 {
   color: var(--yellow);
 }
 
-.header h2 {
-  font-size: 1em;
-  margin-top: 30px;
+.header p {
   color: var(--yellow);
 }
 
