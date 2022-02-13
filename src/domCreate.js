@@ -1,7 +1,7 @@
 import { taskList } from "./defineTasklist.js";
 import format from 'date-fns/format';
 import { arrayLists } from "./updateDelete.js";
-import { eventSelect } from "./eventListeners.js";
+import { createTaskEvent, sideMenuEvent, singleTaskEvent } from "./eventListeners.js";
 
 export default (function domCreate () {
 
@@ -204,7 +204,6 @@ const tasklistDisplay = (list, headline) => {
   const tasklistPane = document.createElement('section');
   tasklistPane.id = "tasklistPane";
 
-
   content.appendChild(tasklistPane);
   tasklistPane.prepend(headers);
   content.removeChild(content.childNodes[1]);
@@ -218,10 +217,10 @@ const tasklistDisplay = (list, headline) => {
   }
 
   displayArray.forEach((item, index) => {
-    
+  
     // get todays date, task date, format and compare for display
     let today = new Date();
-    let date = new Date(item.DateDue);
+    let date = new Date(item.date);
     const todaysDate = format(today, 'EEEE do LLLL yyyy');
     const taskDate = format(date, 'EEEE do LLLL yyyy');
 
@@ -237,7 +236,6 @@ const tasklistDisplay = (list, headline) => {
       itemDate = format(date, 'EEEE do LLLL yyyy');
     }
 
-
     const taskItem = document.createElement('ul');
     taskItem.classList.add('taskItem');
     if (item.complete === true) {
@@ -248,7 +246,7 @@ const tasklistDisplay = (list, headline) => {
     const taskPriority = document.createElement('li');
     const taskPriorityInner = document.createElement('span');
     taskPriority.classList.add('taskPriority');
-    switch(item.Priority) {
+    switch(item.priority) {
       case 'low':
         taskPriority.classList.add('low');
         break;
@@ -265,14 +263,14 @@ const tasklistDisplay = (list, headline) => {
 
     const taskTitle = document.createElement('li');
     taskTitle.classList.add('taskTitle');
-    taskTitle.innerText = `${item.Title}`;
+    taskTitle.innerText = `${item.task}`;
 
     const taskCatagory = document.createElement('li');
     taskCatagory.classList.add('taskCatagory');
-    taskCatagory.innerText = `${item.Catagory}`;
-    if (item.subCatagory !== '') { 
+    taskCatagory.innerText = `${item.project}`;
+    if (item.subcatagory !== '') { 
       const catagorySpan = document.createElement('span');
-      catagorySpan.innerText = `${item.subCatagory}`;
+      catagorySpan.innerText = `${item.subcatagory}`;
       taskCatagory.appendChild(catagorySpan);
     }
 
@@ -281,7 +279,7 @@ const tasklistDisplay = (list, headline) => {
     deadline.innerText = `${itemDate}`;
     if (item.Time !== '') { 
       const timeSpan = document.createElement('span');
-      timeSpan.innerText = `${item.Time}`;
+      timeSpan.innerText = `${item.time}`;
       deadline.appendChild(timeSpan);
     }
 
@@ -334,9 +332,10 @@ const tasklistDisplay = (list, headline) => {
   tasklistPane.prepend(headLine);
 
   // Call event listeners for the modify/delete/view/complete functions
-  eventSelect();
+  singleTaskEvent();
+  sideMenuEvent();
+  createTaskEvent();
 
 };
-
 
 export { tasklistDisplay }

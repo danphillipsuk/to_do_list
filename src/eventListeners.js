@@ -3,10 +3,13 @@ import { arrayLists, createTask } from "./updateDelete.js";
 import { tasklistDisplay } from './domCreate.js';
 
 
-const eventSelect = () => {
+const createTaskEvent = () => {
 
-  // Event Listeners to show and hide create task form
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Event listeners for create task form
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   showForm.addEventListener("click", () => {
+
     const taskForm = document.querySelector('.taskForm');
     taskForm.classList.add('open');
   });
@@ -17,44 +20,21 @@ const eventSelect = () => {
   });
 
   document.querySelector('[data-name="submit"]').addEventListener("click", () => {
-    createTask();
+    const task = document.querySelector("input[name='createTaskTitle']").value;
+    const catagory = document.querySelector("input[name='taskCatagory']").value;
+    const subcatagory = document.querySelector("input[name='subCatagory']").value;
+    const priority = document.querySelector("select[name='priority']").value;
+    const dueDate = document.querySelector("input[name='dueDate']").value;
+    const time = document.querySelector("input[name='time']").value;
+    createTask(task, catagory, subcatagory, priority, dueDate, time);
   });
 
-  // Delete task from taskList array
-  document.querySelectorAll(".deleteTask").forEach(function(item) {
-    item.addEventListener("click", () => {
-      // deleteTask(item.value);
-      console.log("delete")
-    });
-  });
+}
 
-  // Modify task from taskList array
-  document.querySelectorAll(".modifyTask").forEach(function(item) {
-    item.addEventListener("click", () => {
-      // editTask(item.value, displayArray);
-      console.log('modify')
-    });
-  });
-
-  // Modify task from taskList array
-  document.querySelectorAll(".viewProject").forEach(function(item) {
-    item.addEventListener("click", () => {
-      // viewProject(item.value);
-      console.log('view project')
-    });
-  });
-
-    // Modify task from taskList array
-  document.querySelectorAll(".markComplete").forEach(function(item) {
-    item.addEventListener("click", () => {
-      // markComplete(item.value);
-      console.log('complete')
-    });
-  });
-
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // Event listeners for tabs in side menu ////////////////////////
-  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Event listeners for tabs in side
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  const sideMenuEvent = () => {
   const todayTab = document.querySelector('.todayMenu');
   todayTab.addEventListener("click", () => {
     tasklistDisplay(arrayLists.today, 'Today');
@@ -62,7 +42,7 @@ const eventSelect = () => {
 
   const tomorrowTab = document.querySelector('.tomorrowMenu');
   tomorrowTab.addEventListener("click", () => {
-    tasklistDisplay(arrayLists.tomorrow, 'Tomorrow');
+    tasklistDisplay(arrayLists.tomorrowCompleted, 'Tomorrow');
   });
 
   const urgentTab = document.querySelector('.urgentMenu');
@@ -72,12 +52,47 @@ const eventSelect = () => {
 
   document.querySelectorAll(".projectTitle").forEach(function(item) {
     item.addEventListener("click", () => {
-      const project = taskList.filter(task => task.Catagory === item.dataset.name);
+      const project = taskList.filter(task => task.project === item.dataset.name);
       tasklistDisplay(project, item.dataset.name);
     });
   });
 
+  }
 
-}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Event listeners for individual task actions 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  const singleTaskEvent = () => {
+    document.querySelectorAll(".deleteTask").forEach(function(item) {
+      item.addEventListener("click", () => {
+        // deleteTask(item.value);
+        console.log("delete")
+      });
+    });
+  
+    // Modify task from taskList array
+    document.querySelectorAll(".modifyTask").forEach(function(item) {
+      item.addEventListener("click", () => {
+        // editTask(item.value, displayArray);
+        console.log('modify')
+      });
+    });
+  
+    // Modify task from taskList array
+    document.querySelectorAll(".viewProject").forEach(function(item) {
+      item.addEventListener("click", () => {
+        // viewProject(item.value);
+        console.log('view project')
+      });
+    });
+  
+      // Modify task from taskList array
+    document.querySelectorAll(".markComplete").forEach(function(item) {
+      item.addEventListener("click", () => {
+        // markComplete(item.value);
+        console.log('complete')
+      });
+    });
+    }
 
-export { eventSelect }
+export { createTaskEvent, sideMenuEvent, singleTaskEvent }

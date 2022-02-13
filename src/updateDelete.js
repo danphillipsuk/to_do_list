@@ -1,11 +1,12 @@
 import addDays from 'date-fns/addDays';
 import { taskList } from "./defineTasklist.js";
+import { tasklistDisplay } from './domCreate.js';
 
 // Get array for todays date
 const arrayLists = (() => {
 
   // Get array for todays date
-  const today = taskList.filter(task => task.DateDue === new Date().toISOString().slice(0,10));
+  const today = taskList.filter(task => task.date === new Date().toISOString().slice(0,10));
   const todayCompleted = today.filter(task => task.complete === false);
   const todaysNum = todayCompleted.length;
   const todayHeadline = 'Today';
@@ -13,20 +14,20 @@ const arrayLists = (() => {
   // Get array for tomorrows date
   let todaysDate = addDays(new Date(), 1);
   let tomorrowsDate = todaysDate.toISOString().slice(0,10);
-  const tomorrow = taskList.filter(task => task.DateDue === tomorrowsDate);
+  const tomorrow = taskList.filter(task => task.date === tomorrowsDate);
   const tomorrowCompleted = tomorrow.filter(task => task.complete === false);
   const tomorrowsNum = tomorrowCompleted.length;
   const tomorrowsHeadline = 'Tomorrow';
 
   // Get array of tasks with high priority
   const highPriorityHeadline = 'High Priority';
-  const highPriority = taskList.filter(task => task.Priority === 'high');
+  const highPriority = taskList.filter(task => task.priority === 'high');
   const priorityCompleted = highPriority.filter(task => task.complete === false);
   const priorityNum = priorityCompleted.length;
 
   // Get array for individual projects
   // create new array of catagory names
-  const projects = taskList.map(project => project.Catagory);
+  const projects = taskList.map(project => project.project);
   // count ocurrances of each catagory name 
   const countProjects = projects.reduce((acc, value) => {
   return { 
@@ -38,56 +39,37 @@ const arrayLists = (() => {
 
   return { 
     today, todaysNum, todayHeadline,
-    tomorrowsNum, tomorrowsHeadline,
+    tomorrowsNum, tomorrowsHeadline, tomorrowCompleted,
     highPriorityHeadline, priorityNum, priorityCompleted,
     uniqueProjects, countProjects
   };
 
 })();
 
-const createTask = () => {
 
-  console.log('create')
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Process new task submission
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const createTask = (task, project, subcatagory, priority, date, time) => {
+  
+  // New task object factory
+  const newTaskFactory = (task, project, subcatagory, priority, date, time) => {
+    const id = Math.random();
+    const complete = false;
+    return { id, task, project, subcatagory, priority, date, time, complete };
+  }
 
-    //       constructor(id, title, catagory, subCatagory, priority, dateDue, time) {
-    //         this.id = id;
-    //         this.Title = title;
-    //         this.Catagory = catagory;
-    //         this.subCatagory = subCatagory;
-    //         this.Priority = priority;
-    //         this.DateDue = dateDue;
-    //         this.Time = time;
-    //         this.complete = false;
-    //       }
-    //     } 
-    
-    //     //function to run on taskForm submit
-    //     function newTask () {
-          const title = document.querySelector("input[name='createTaskTitle']").value;
-          const catagory = document.querySelector("input[name='taskCatagory']").value;
-          const subcatagory = document.querySelector("input[name='subCatagory']").value;
-          const priority = document.querySelector("select[name='priority']").value;
-          const dueDate = document.querySelector("input[name='dueDate']").value;
-          const time = document.querySelector("input[name='time']").value;
+  // Create new task object
+  const newTask = newTaskFactory(task, project, subcatagory, priority, date, time);
+  console.log(newTask)
 
-          console.log(title)
-            
-    //       if (title !== '' && dueDate !== '') {
-    //         const id = Math.random();
-            
-    //         // Create a new task object
-    //         const newAddition = new taskClass(id, title, catagory, subcatagory, priority, dueDate, time);
-    
-    //         // add new task to taskList array and set in localStorage
-    //         const taskList = JSON.parse(window.localStorage.getItem("taskList"));
-    //         taskList.push(newAddition);
-    //         window.localStorage.setItem("taskList", JSON.stringify(taskList));
-    //         location.reload(); 
-    
-    //       }
-    //     }
+  // add new task to taskList array and set in localStorage
+  taskList.push(newTask);
+  window.localStorage.setItem("taskList", JSON.stringify(taskList));
+  const content = document.getElementById('content');
+  content.removeChild(content.childNodes[1]);
+  tasklistDisplay();
+
 }
-
-
 
 export {  arrayLists, createTask }
