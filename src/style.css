@@ -329,7 +329,6 @@ h2 {
 
 .completed span {
   color: var(--darkBlue);
-  margin-left: 5px;
   cursor: pointer;
   font-weight: 600;
 }

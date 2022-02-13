@@ -46,6 +46,36 @@ if (taskList === null) {
       date: yesterday,
       time: "",
       complete: true
+    },
+    {
+      id: 963127,
+      task: "Arrange head of department meeting", 
+      project: "whatKnot App Development", 
+      subcatagory: "Management",
+      priority: "high",
+      date: tomorrow,
+      time: "12:00",
+      complete: false
+    },
+    {
+      id: 87234567,
+      task: "Update on wireframing", 
+      project: "whatKnot App Development", 
+      subcatagory: "UX",
+      priority: "high",
+      date: today,
+      time: "",
+      complete: false
+    },
+    {
+      id: 363347,
+      task: "Colour/swatch update", 
+      project: "whatKnot App Development", 
+      subcatagory: "UI",
+      priority: "medium",
+      date: yesterday,
+      time: "",
+      complete: true
     }
   ];
   

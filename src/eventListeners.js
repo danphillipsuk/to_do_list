@@ -1,5 +1,14 @@
 import { taskList } from "./defineTasklist.js";
-import { arrayLists, createTask, markComplete, undoComplete, deleteTask } from "./updateDelete.js";
+import { 
+  arrayLists, 
+  createTask, 
+  markComplete, 
+  undoComplete, 
+  deleteTask, 
+  viewProject, 
+  editTask,
+  updateTask 
+} from "./updateDelete.js";
 import { tasklistDisplay } from './domCreate.js';
 
 
@@ -59,7 +68,7 @@ const createTaskEvent = () => {
 
   }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Event listeners for individual task actions 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //Delete task from taskList array
@@ -73,15 +82,15 @@ const createTaskEvent = () => {
     // Modify task from taskList array
     document.querySelectorAll(".modifyTask").forEach(function(item) {
       item.addEventListener("click", () => {
-        editTask(item.value, displayArray);
+        // editTask(item.value, displayArray);
+        editTask(item.value);
       });
     });
   
     // View project from taskList array
     document.querySelectorAll(".viewProject").forEach(function(item) {
       item.addEventListener("click", () => {
-        // viewProject(item.value);
-        console.log('view project')
+        viewProject(item.value);
       });
     });
   
@@ -98,7 +107,34 @@ const createTaskEvent = () => {
         undoComplete(item.value);
       });
     });
+  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Event listeners for modify task form submit
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  const updateTaskEvent = (index) => {
+
+    document.querySelector('[data-name="updateSubmit"]').addEventListener("click", () => {
+      
+      const updateTask1 = document.querySelector("input[name='updateTask']").value;
+      const updateProject = document.querySelector("input[name='updateProject']").value;
+      const updateCatagory = document.querySelector("input[name='updateCatagory']").value;
+      const updatePriority = document.querySelector("select[name='updatePriority']").value;
+      const updateDate = document.querySelector("input[name='updateDate']").value;
+      const updateTime = document.querySelector("input[name='updateTime']").value;
+
+      updateTask(
+        index, 
+        updateTask1,
+        updateProject,
+        updateCatagory,
+        updatePriority,
+        updateDate,
+        updateTime
+      );
+
+    });
 
   }
 
-export { createTaskEvent, sideMenuEvent, singleTaskEvent }
+export { createTaskEvent, sideMenuEvent, singleTaskEvent, updateTaskEvent }

@@ -1,7 +1,7 @@
 import addDays from 'date-fns/addDays';
 import { uniq } from 'lodash';
 import { taskList } from "./defineTasklist.js";
-import { tasklistDisplay } from './domCreate.js';
+import { tasklistDisplay, modifySingleTask } from './domCreate.js';
 
 // Get array for todays date
 const arrayLists = (() => {
@@ -130,4 +130,69 @@ const deleteTask = (unique_id) => {
   
 };
 
-export {  arrayLists, createTask, markComplete, undoComplete, deleteTask }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// View Project
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const viewProject = (cat) => {
+
+  const catagoryArray = taskList.filter(task => task.project == cat);
+  tasklistDisplay(catagoryArray, cat);
+
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Edit individual task
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const editTask = (unique_id) => {
+
+  // find index of item to delete in master array (taskList)
+  const taskListIndex = taskList.findIndex((obj) => {
+    if(obj.id == unique_id) {
+      return true;
+    };
+    return false;
+  });
+
+  const task = taskList.filter(task => task.id == unique_id);
+
+  modifySingleTask(taskListIndex, task);
+
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Update taskList array with modified task
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const updateTask = (
+  index, 
+  updateTask1,
+  updateProject,
+  updateCatagory,
+  updatePriority,
+  updateDate,
+  updateTime
+) => {
+
+  if (updateTask1) {
+    taskList[index].task = updateTask1;
+  }
+  if (updateProject) {
+    taskList[index].project = updateProject;
+  }
+  if (updateCatagory) {
+    taskList[index].subcatagory = updateCatagory;
+  }
+  if (updatePriority) {
+    taskList[index].priority = updatePriority;
+  }
+  if (updateDate) {
+    taskList[index].date = updateDate;
+  }
+  if (updateTime) {
+    taskList[index].time = updateTime;
+  }
+
+  localStorage.setItem("taskList", JSON.stringify(taskList));
+  location.reload(); 
+};
+
+export {  arrayLists, createTask, markComplete, undoComplete, deleteTask, viewProject, editTask, updateTask }

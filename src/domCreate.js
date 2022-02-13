@@ -1,7 +1,7 @@
 import { taskList } from "./defineTasklist.js";
 import format from 'date-fns/format';
 import { arrayLists } from "./updateDelete.js";
-import { createTaskEvent, sideMenuEvent, singleTaskEvent } from "./eventListeners.js";
+import { createTaskEvent, sideMenuEvent, singleTaskEvent, updateTaskEvent } from "./eventListeners.js";
 
 export default (function domCreate () {
 
@@ -301,7 +301,7 @@ const tasklistDisplay = (list, headline) => {
 
     // create view project button for each task
     const viewProject = document.createElement('button');
-    viewProject.value = `${item['Catagory']}`;
+    viewProject.value = `${item['project']}`;
     viewProject.classList.add('viewProject');
     viewProject.innerText = "View Project";
 
@@ -312,7 +312,7 @@ const tasklistDisplay = (list, headline) => {
       const undo = document.createElement('span');
       undo.dataset.name = 'undo';
       undo.value = `${item['id']}`;
-      undo.innerText = 'Undo?';
+      undo.innerText = ' Undo?';
       completed.append(undo);
       buttonWrapper.append(modifyTask, deleteTask, viewProject, completed);
     } else {
@@ -343,4 +343,187 @@ const tasklistDisplay = (list, headline) => {
 
 };
 
-export { tasklistDisplay }
+const modifySingleTask = (index) => {
+
+  const content = document.getElementById('content');
+  content.removeChild(content.childNodes[1]);    
+
+  let taskFormEditTitle = document.createElement('h2');
+  taskFormEditTitle.innerText = "Modify Task";
+
+  // Create display of task being edited
+  const headers = document.createElement('ul');
+  headers.innerHTML = 
+    '<ul id="columnHeaders">\
+      <li>Priority</li>\
+      <li>Task</li>\
+      <li>Project</li>\
+      <li>Deadline</li>\
+    </ul>';
+
+      // get todays date, task date, format and compare for display
+      let today = new Date();
+      let date = new Date(taskList[index].date);
+      const todaysDate = format(today, 'EEEE do LLLL yyyy');
+      const taskDate = format(date, 'EEEE do LLLL yyyy');
+  
+      let thisYear = today.getFullYear();
+      let taskYear = date.getFullYear();
+  
+      let itemDate; 
+      if (todaysDate === taskDate) { 
+        itemDate = 'Due Today';
+      } else if (thisYear === taskYear) {
+        itemDate = format(date, 'EEEE do LLLL');
+      } else {
+        itemDate = format(date, 'EEEE do LLLL yyyy');
+      }
+
+  const taskItem = document.createElement('ul');
+  taskItem.classList.add('taskItem');
+
+  const taskPriority = document.createElement('li');
+  const taskPriorityInner = document.createElement('span');
+  taskPriority.classList.add('taskPriority');
+  switch(taskList[index].priority) {
+    case 'low':
+      taskPriority.classList.add('low');
+      break;
+    case 'medium':
+      taskPriority.classList.add('medium');
+      break;
+    case 'high':
+      taskPriority.classList.add('high');
+      break;
+    default:
+      break;
+  }
+  taskPriority.append(taskPriorityInner);
+
+  const taskTitle = document.createElement('li');
+  taskTitle.classList.add('taskTitle');
+  taskTitle.innerText = `${taskList[index].task}`;
+
+  const taskCatagory = document.createElement('li');
+  taskCatagory.classList.add('taskCatagory');
+  taskCatagory.innerText = `${taskList[index].project}`;
+  if (taskList[index].subcatagory !== '') { 
+    const catagorySpan = document.createElement('span');
+    catagorySpan.innerText = `${taskList[index].subcatagory}`;
+    taskCatagory.appendChild(catagorySpan);
+  }
+
+  const deadline = document.createElement('li');
+    deadline.classList.add('deadline');
+    deadline.innerText = `${itemDate}`;
+    if (taskList[index].time !== '') { 
+      const timeSpan = document.createElement('span');
+      timeSpan.innerText = `${taskList[index].time}`;
+      deadline.appendChild(timeSpan);
+    }
+
+
+  const tasklistPane = document.createElement('section');
+  tasklistPane.id = "tasklistPane";
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Create form to update task
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  let taskForm = document.createElement('div');
+  taskForm.classList.add('taskFormEdit');
+
+  const itemOne = document.createElement('div');
+  itemOne.innerHTML = '<label for="updateTask">Task</label>';
+  const itemOneInput = document.createElement('input');
+  itemOneInput.name = 'updateTask';
+  itemOneInput.type = 'text';
+  itemOne.appendChild(itemOneInput);
+
+  const itemTwo = document.createElement('div');
+  itemTwo.innerHTML = '<label for="updateProject">Project Title</label>';
+  const itemTwoInput = document.createElement('input');
+  itemTwoInput.name = 'updateProject';
+  itemTwoInput.type = 'text';
+  itemTwo.appendChild(itemTwoInput);
+
+  const itemThree = document.createElement('div');
+  itemThree.innerHTML = '<label for="updateCatagory">Sub Catagory</label>';
+  const itemThreeInput = document.createElement('input');
+  itemThreeInput.name = 'updateCatagory';
+  itemThreeInput.type = 'text';
+  itemThree.appendChild(itemThreeInput);
+
+  const itemFour = document.createElement('div');
+  itemFour.innerHTML = '<label for="updatePriority">Priority</label>';
+  const itemFourInput = document.createElement('select');
+  itemFourInput.name = 'updatePriority';
+
+  const priorityZero = document.createElement('option');
+
+  const priorityOne = document.createElement('option');
+  priorityOne.value = 'low';
+  priorityOne.text = 'Low';
+
+  const priorityTwo = document.createElement('option');
+  priorityTwo.value = 'medium';
+  priorityTwo.text = 'Medium';
+
+  const priorityThree = document.createElement('option');
+  priorityThree.value = 'high';
+  priorityThree.text = 'High';
+
+  itemFourInput.append(priorityZero, priorityOne, priorityTwo, priorityThree);
+  itemFour.appendChild(itemFourInput);
+
+  const itemFive = document.createElement('div');
+  itemFive.innerHTML = '<label for="updateDate">Due Date</label>';
+  const itemFiveInput = document.createElement('input');
+  itemFiveInput.name = 'updateDate';
+  itemFiveInput.type = 'date';
+  itemFive.appendChild(itemFiveInput);
+
+  const itemSix = document.createElement('div');
+  itemSix.innerHTML = '<label for="updateTime">Time</label>';
+  const itemSixInput = document.createElement('input');
+  itemSixInput.name = 'updateTime';
+  itemSixInput.type = 'time';
+  itemSix.appendChild(itemSixInput);
+
+  const itemSeven = document.createElement('div');
+  const itemSevenSubmit = document.createElement('button');
+  itemSevenSubmit.id = 'submit';
+  itemSevenSubmit.dataset.name = 'updateSubmit';
+  itemSevenSubmit.innerText = 'Update Task';
+
+  const itemSevenCancel = document.createElement('button');
+  itemSevenCancel.id = 'cancel';
+  itemSevenCancel.dataset.name = 'updateCancel';
+  itemSevenCancel.innerText = 'Cancel';
+
+  itemSeven.append(itemSevenSubmit, itemSevenCancel);
+
+  taskForm.append(
+    itemOne, itemTwo, itemThree, itemFour, itemFive, itemSix, itemSeven
+  );
+
+  taskItem.append(
+    taskPriority,
+    taskTitle,
+    taskCatagory,
+    deadline,
+  );
+  
+  tasklistPane.append(taskFormEditTitle)
+  tasklistPane.append(headers);
+  tasklistPane.append(taskItem);
+  tasklistPane.append(taskForm);
+
+  content.append(tasklistPane);
+
+  updateTaskEvent(index);
+
+}
+
+
+
+export { tasklistDisplay, modifySingleTask  }
