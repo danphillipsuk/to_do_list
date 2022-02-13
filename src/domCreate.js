@@ -309,6 +309,11 @@ const tasklistDisplay = (list, headline) => {
       const completed = document.createElement('button');
       completed.classList.add('completedButton');
       completed.innerText = "Completed";
+      const undo = document.createElement('span');
+      undo.dataset.name = 'undo';
+      undo.value = `${item['id']}`;
+      undo.innerText = 'Undo?';
+      completed.append(undo);
       buttonWrapper.append(modifyTask, deleteTask, viewProject, completed);
     } else {
       // create view project button for each task

@@ -1,5 +1,5 @@
 import { taskList } from "./defineTasklist.js";
-import { arrayLists, createTask, markComplete } from "./updateDelete.js";
+import { arrayLists, createTask, markComplete, undoComplete, deleteTask } from "./updateDelete.js";
 import { tasklistDisplay } from './domCreate.js';
 
 
@@ -62,11 +62,11 @@ const createTaskEvent = () => {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Event listeners for individual task actions 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //Delete task from taskList array
   const singleTaskEvent = () => {
     document.querySelectorAll(".deleteTask").forEach(function(item) {
       item.addEventListener("click", () => {
-        // deleteTask(item.value);
-        console.log("delete")
+        deleteTask(item.value);
       });
     });
   
@@ -77,7 +77,7 @@ const createTaskEvent = () => {
       });
     });
   
-    // Modify task from taskList array
+    // View project from taskList array
     document.querySelectorAll(".viewProject").forEach(function(item) {
       item.addEventListener("click", () => {
         // viewProject(item.value);
@@ -85,12 +85,20 @@ const createTaskEvent = () => {
       });
     });
   
-      // Modify task from taskList array
+      // Mark task complete
     document.querySelectorAll(".markComplete").forEach(function(item) {
       item.addEventListener("click", () => {
         markComplete(item.value);
       });
     });
-    }
+
+    // Remove complete status from task
+    document.querySelectorAll('[data-name="undo"]').forEach(function(item) {
+      item.addEventListener("click", () => {
+        undoComplete(item.value);
+      });
+    });
+
+  }
 
 export { createTaskEvent, sideMenuEvent, singleTaskEvent }

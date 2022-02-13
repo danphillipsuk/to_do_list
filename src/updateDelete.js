@@ -87,6 +87,47 @@ const markComplete = (unique_id) => {
   taskList[taskListIndex].complete = true;
   localStorage.setItem("taskList", JSON.stringify(taskList));
   location.reload(); 
+
 };
 
-export {  arrayLists, createTask, markComplete }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Undo Task Complete
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const undoComplete = (unique_id) => {
+
+  const taskListIndex = taskList.findIndex((obj) => {
+    if(obj.id == unique_id) {
+      return true;
+    };
+    return false;
+  });
+
+  taskList[taskListIndex].complete = false;
+  localStorage.setItem("taskList", JSON.stringify(taskList));
+  location.reload(); 
+  
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Delete Task
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const deleteTask = (unique_id) => {
+
+  // find index of item to delete in master array (taskList)
+  const taskListIndex = taskList.findIndex((obj) => {
+    if(obj.id == unique_id) {
+      return true;
+    };
+    return false;
+  });
+
+  // remove item from master array
+  taskList.splice(taskListIndex, 1);
+
+  // upload new array to local storage
+  localStorage.setItem("taskList", JSON.stringify(taskList));
+  location.reload(); 
+  
+};
+
+export {  arrayLists, createTask, markComplete, undoComplete, deleteTask }
