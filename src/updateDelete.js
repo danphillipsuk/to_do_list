@@ -1,4 +1,5 @@
 import addDays from 'date-fns/addDays';
+import { uniq } from 'lodash';
 import { taskList } from "./defineTasklist.js";
 import { tasklistDisplay } from './domCreate.js';
 
@@ -72,4 +73,20 @@ const createTask = (task, project, subcatagory, priority, date, time) => {
 
 }
 
-export {  arrayLists, createTask }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Mark Task Complete
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const markComplete = (unique_id) => {
+
+  const taskListIndex = taskList.findIndex((obj) => {
+    if(obj.id == unique_id) {
+      return true;
+    };
+    return false;
+  });
+  taskList[taskListIndex].complete = true;
+  localStorage.setItem("taskList", JSON.stringify(taskList));
+  location.reload(); 
+};
+
+export {  arrayLists, createTask, markComplete }

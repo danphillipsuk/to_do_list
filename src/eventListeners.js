@@ -1,5 +1,5 @@
 import { taskList } from "./defineTasklist.js";
-import { arrayLists, createTask } from "./updateDelete.js";
+import { arrayLists, createTask, markComplete } from "./updateDelete.js";
 import { tasklistDisplay } from './domCreate.js';
 
 
@@ -73,8 +73,7 @@ const createTaskEvent = () => {
     // Modify task from taskList array
     document.querySelectorAll(".modifyTask").forEach(function(item) {
       item.addEventListener("click", () => {
-        // editTask(item.value, displayArray);
-        console.log('modify')
+        editTask(item.value, displayArray);
       });
     });
   
@@ -89,8 +88,7 @@ const createTaskEvent = () => {
       // Modify task from taskList array
     document.querySelectorAll(".markComplete").forEach(function(item) {
       item.addEventListener("click", () => {
-        // markComplete(item.value);
-        console.log('complete')
+        markComplete(item.value);
       });
     });
     }
