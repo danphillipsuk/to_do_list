@@ -1,130 +1,149 @@
 import { taskList } from "./defineTasklist.js";
-import { 
-  arrayLists, 
-  createTask, 
-  markComplete, 
-  undoComplete, 
-  deleteTask, 
-  viewProject, 
+import {
+  arrayLists,
+  createTask,
+  markComplete,
+  undoComplete,
+  deleteTask,
+  viewProject,
   editTask,
-  updateTask 
+  updateTask,
 } from "./updateDelete.js";
-import { tasklistDisplay } from './domCreate.js';
-
+import { tasklistDisplay } from "./domCreate.js";
 
 const createTaskEvent = () => {
-
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // Event listeners for create task form
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  showForm.addEventListener("click", () => {
-
-    const taskForm = document.querySelector('.taskForm');
-    taskForm.classList.add('open');
+  document.getElementbyId("showForm").addEventListener("click", () => {
+    const taskForm = document.querySelector(".taskForm");
+    taskForm.classList.add("open");
   });
 
-  document.querySelector('[data-name="cancel"]').addEventListener("click", () => {
-    const taskForm = document.querySelector('.taskForm');
-    taskForm.classList.remove('open');
-  });
+  document
+    .querySelector('[data-name="cancel"]')
+    .addEventListener("click", () => {
+      const taskForm = document.querySelector(".taskForm");
+      taskForm.classList.remove("open");
+    });
 
-  document.querySelector('[data-name="submit"]').addEventListener("click", () => {
-    const task = document.querySelector("input[name='createTaskTitle']").value;
-    const catagory = document.querySelector("input[name='taskCatagory']").value;
-    const subcatagory = document.querySelector("input[name='subCatagory']").value;
-    const priority = document.querySelector("select[name='priority']").value;
-    const dueDate = document.querySelector("input[name='dueDate']").value;
-    const time = document.querySelector("input[name='time']").value;
-    createTask(task, catagory, subcatagory, priority, dueDate, time);
-  });
+  document
+    .querySelector('[data-name="submit"]')
+    .addEventListener("click", () => {
+      const task = document.querySelector(
+        "input[name='createTaskTitle']"
+      ).value;
+      const catagory = document.querySelector(
+        "input[name='taskCatagory']"
+      ).value;
+      const subcatagory = document.querySelector(
+        "input[name='subCatagory']"
+      ).value;
+      const priority = document.querySelector("select[name='priority']").value;
+      const dueDate = document.querySelector("input[name='dueDate']").value;
+      const time = document.querySelector("input[name='time']").value;
+      createTask(task, catagory, subcatagory, priority, dueDate, time);
+    });
+};
 
-}
-
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // Event listeners for tabs in side
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  const sideMenuEvent = () => {
-  const todayTab = document.querySelector('.todayMenu');
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Event listeners for tabs in side
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const sideMenuEvent = () => {
+  const todayTab = document.querySelector(".todayMenu");
   todayTab.addEventListener("click", () => {
-    tasklistDisplay(arrayLists.today, 'Today');
+    tasklistDisplay(arrayLists.today, "Today");
   });
 
-  const tomorrowTab = document.querySelector('.tomorrowMenu');
+  const tomorrowTab = document.querySelector(".tomorrowMenu");
   tomorrowTab.addEventListener("click", () => {
-    tasklistDisplay(arrayLists.tomorrowCompleted, 'Tomorrow');
+    tasklistDisplay(arrayLists.tomorrowCompleted, "Tomorrow");
   });
 
-  const urgentTab = document.querySelector('.urgentMenu');
+  const urgentTab = document.querySelector(".urgentMenu");
   urgentTab.addEventListener("click", () => {
-    tasklistDisplay(arrayLists.priorityCompleted, 'High Priority');
+    tasklistDisplay(arrayLists.priorityCompleted, "High Priority");
   });
 
-  document.querySelectorAll(".projectTitle").forEach(function(item) {
+  document.querySelectorAll(".projectTitle").forEach(function (item) {
     item.addEventListener("click", () => {
-      const project = taskList.filter(task => task.project === item.dataset.name);
+      const project = taskList.filter(
+        (task) => task.project === item.dataset.name
+      );
       tasklistDisplay(project, item.dataset.name);
     });
   });
+};
 
-  }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Event listeners for individual task actions
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Delete task from taskList array
+const singleTaskEvent = () => {
+  document.querySelectorAll(".deleteTask").forEach(function (item) {
+    item.addEventListener("click", () => {
+      deleteTask(item.value);
+    });
+  });
 
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // Event listeners for individual task actions 
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //Delete task from taskList array
-  const singleTaskEvent = () => {
-    document.querySelectorAll(".deleteTask").forEach(function(item) {
-      item.addEventListener("click", () => {
-        deleteTask(item.value);
-      });
+  // Modify task from taskList array
+  document.querySelectorAll(".modifyTask").forEach(function (item) {
+    item.addEventListener("click", () => {
+      // editTask(item.value, displayArray);
+      editTask(item.value);
     });
-  
-    // Modify task from taskList array
-    document.querySelectorAll(".modifyTask").forEach(function(item) {
-      item.addEventListener("click", () => {
-        // editTask(item.value, displayArray);
-        editTask(item.value);
-      });
-    });
-  
-    // View project from taskList array
-    document.querySelectorAll(".viewProject").forEach(function(item) {
-      item.addEventListener("click", () => {
-        viewProject(item.value);
-      });
-    });
-  
-      // Mark task complete
-    document.querySelectorAll(".markComplete").forEach(function(item) {
-      item.addEventListener("click", () => {
-        markComplete(item.value);
-      });
-    });
+  });
 
-    // Remove complete status from task
-    document.querySelectorAll('[data-name="undo"]').forEach(function(item) {
-      item.addEventListener("click", () => {
-        undoComplete(item.value);
-      });
+  // View project from taskList array
+  document.querySelectorAll(".viewProject").forEach(function (item) {
+    item.addEventListener("click", () => {
+      viewProject(item.value);
     });
-  }
+  });
 
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // Event listeners for modify task form submit
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  const updateTaskEvent = (index) => {
+  // Mark task complete
+  document.querySelectorAll(".markComplete").forEach(function (item) {
+    item.addEventListener("click", () => {
+      markComplete(item.value);
+    });
+  });
 
-    document.querySelector('[data-name="updateSubmit"]').addEventListener("click", () => {
-      
-      const updateTask1 = document.querySelector("input[name='updateTask']").value;
-      const updateProject = document.querySelector("input[name='updateProject']").value;
-      const updateCatagory = document.querySelector("input[name='updateCatagory']").value;
-      const updatePriority = document.querySelector("select[name='updatePriority']").value;
-      const updateDate = document.querySelector("input[name='updateDate']").value;
-      const updateTime = document.querySelector("input[name='updateTime']").value;
+  // Remove complete status from task
+  document.querySelectorAll('[data-name="undo"]').forEach(function (item) {
+    item.addEventListener("click", () => {
+      undoComplete(item.value);
+    });
+  });
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Event listeners for modify task form submit
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const updateTaskEvent = (index) => {
+  document
+    .querySelector('[data-name="updateSubmit"]')
+    .addEventListener("click", () => {
+      const updateTask1 = document.querySelector(
+        "input[name='updateTask']"
+      ).value;
+      const updateProject = document.querySelector(
+        "input[name='updateProject']"
+      ).value;
+      const updateCatagory = document.querySelector(
+        "input[name='updateCatagory']"
+      ).value;
+      const updatePriority = document.querySelector(
+        "select[name='updatePriority']"
+      ).value;
+      const updateDate = document.querySelector(
+        "input[name='updateDate']"
+      ).value;
+      const updateTime = document.querySelector(
+        "input[name='updateTime']"
+      ).value;
 
       updateTask(
-        index, 
+        index,
         updateTask1,
         updateProject,
         updateCatagory,
@@ -132,9 +151,7 @@ const createTaskEvent = () => {
         updateDate,
         updateTime
       );
-
     });
+};
 
-  }
-
-export { createTaskEvent, sideMenuEvent, singleTaskEvent, updateTaskEvent }
+export { createTaskEvent, sideMenuEvent, singleTaskEvent, updateTaskEvent };

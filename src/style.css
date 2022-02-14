@@ -220,6 +220,13 @@ h2 {
     border-top: solid 1px var(--grey);
     border-bottom: solid 1px var(--grey);
     font-size: .9em;
+    border-radius: 3px;
+}
+
+.overdue {
+  border-top: double 3px rgb(223, 59, 10);
+  border-bottom: double 3px rgb(223, 59, 10);
+
 }
 
 .taskItem:hover {
@@ -281,6 +288,7 @@ h2 {
 .deadline,  #columnHeaders > li:nth-of-type(4) {
   width: 25%;
   text-align: right;
+  padding-right: 10px;
 }
 
 .deadline span {
