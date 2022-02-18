@@ -149,35 +149,62 @@ export default (function domCreate() {
   (function createSideMenu() {
     const projectMenu = document.createElement("div");
     projectMenu.id = "projectMenu";
-    const todayTab = document.createElement("p");
+    const projectMenuUl = document.createElement("ul");
+    projectMenuUl.id = "immediateTasks";
+    const todayTab = document.createElement("li");
     todayTab.classList.add("todayMenu");
     todayTab.innerHTML = `TODAY <span> ${arrayLists.todaysNum}</span>`;
 
-    const tomorrowTab = document.createElement("p");
+    const tomorrowTab = document.createElement("li");
     tomorrowTab.classList.add("tomorrowMenu");
     tomorrowTab.innerHTML = `TOMORROW <span> ${arrayLists.tomorrowsNum}</span>`;
 
-    const urgentTab = document.createElement("p");
+    const urgentTab = document.createElement("li");
     urgentTab.classList.add("urgentMenu");
     urgentTab.innerHTML = `HIGH PRIORITY <span>${arrayLists.priorityNum}</span>`;
 
-    const projectTabContainer = document.createElement("div");
-    projectTabContainer.id = "projectTabContainer";
-    projectTabContainer.innerHTML = "<h4>PROJECTS</h4>";
+    const projectTabButton = document.createElement("li");
+    projectTabButton.id = "projectTabButton";
+    projectTabButton.innerHTML = "PROJECTS";
+
+    const projectTabButtonClose = document.createElement("li");
+    projectTabButtonClose.id = "projectTabButtonClose";
+    projectTabButtonClose.innerHTML = "CLOSE";
 
     // Loop through array of project titles and create tab for each project
+    const projectTabContainer = document.createElement("ul");
+    projectTabContainer.id = "projectTabContainer";
+    projectTabContainer.innerHTML = "<li id='mobileProjectTitle'>Projects</li>";
     arrayLists.uniqueProjects.forEach((project) => {
       const num = arrayLists.countProjects[project];
-      const projectTab = document.createElement("p");
+      const projectTab = document.createElement("li");
       projectTab.classList.add("projectTitle");
       projectTab.dataset.name = project;
       projectTab.innerHTML = `${project} <span>${num}</span>`;
       projectTabContainer.appendChild(projectTab);
     });
 
-    projectMenu.append(todayTab, tomorrowTab, urgentTab, projectTabContainer);
+    projectMenuUl.append(todayTab, tomorrowTab, urgentTab, projectTabButton, projectTabButtonClose);
+    projectMenu.append(projectMenuUl, projectTabContainer);
     content.prepend(projectMenu);
   })();
+
+    const mobileMenuButton = document.getElementById("projectTabButton");
+    const closeMenu = document.getElementById("projectTabButtonClose");
+    mobileMenuButton.addEventListener("click", () => {
+      const cont = document.getElementById("projectTabContainer");
+      cont.classList.add('active');
+      mobileMenuButton.style.display = 'none';
+      closeMenu.style.display = "flex";
+    })
+
+    closeMenu.addEventListener("click", () => {
+      const cont = document.getElementById("projectTabContainer");
+      cont.classList.remove('active');
+      mobileMenuButton.style.display = 'flex';
+      closeMenu.style.display = "none";
+    })
+
 })();
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -192,6 +219,17 @@ const tasklistDisplay = (list, headline) => {
   }
   headLine.innerText = `${headline}`;
 
+  let displayArray;
+
+  if (!list) {
+    displayArray = arrayLists.today;
+  } else {
+    displayArray = list;
+  }
+
+  // if (displayArray.length < 1) {
+  //   return;
+  // }
   // Create headers for task pane
   const headers = document.createElement("ul");
   headers.innerHTML =
@@ -209,15 +247,9 @@ const tasklistDisplay = (list, headline) => {
   tasklistPane.prepend(headers);
   content.removeChild(content.childNodes[1]);
 
-  let displayArray;
-
-  if (!list) {
-    displayArray = arrayLists.today;
-  } else {
-    displayArray = list;
-  }
-
+  
   displayArray.forEach((item) => {
+  
     // Assign object values to variables
     const itemPriority = item.priority;
     const itemTask = item.task;

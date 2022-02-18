@@ -18,6 +18,7 @@ const createTaskEvent = () => {
   showForm.addEventListener("click", () => {
     const taskForm = document.querySelector(".taskForm");
     taskForm.classList.add("open");
+  
   });
 
   document
@@ -53,16 +54,26 @@ const sideMenuEvent = () => {
   const todayTab = document.querySelector(".todayMenu");
   todayTab.addEventListener("click", () => {
     tasklistDisplay(arrayLists.today, "Today");
+    const cont = document.getElementById("projectTabContainer");
+    const closeMenu = document.getElementById("projectTabButtonClose");
+    const mobileMenuButton = document.getElementById("projectTabButton");
+    cont.classList.remove('active');
+    mobileMenuButton.style.display = 'flex';
+    closeMenu.style.display = "none";
   });
 
   const tomorrowTab = document.querySelector(".tomorrowMenu");
   tomorrowTab.addEventListener("click", () => {
     tasklistDisplay(arrayLists.tomorrowCompleted, "Tomorrow");
+    const cont = document.getElementById("projectTabContainer");
+    cont.classList.remove('active');
   });
 
   const urgentTab = document.querySelector(".urgentMenu");
   urgentTab.addEventListener("click", () => {
     tasklistDisplay(arrayLists.priorityCompleted, "High Priority");
+    const cont = document.getElementById("projectTabContainer");
+    cont.classList.remove('active');
   });
 
   document.querySelectorAll(".projectTitle").forEach(function (item) {
@@ -71,6 +82,8 @@ const sideMenuEvent = () => {
         (task) => task.project === item.dataset.name
       );
       tasklistDisplay(project, item.dataset.name);
+      const cont = document.getElementById("projectTabContainer");
+      cont.classList.remove('active');
     });
   });
 };
@@ -153,5 +166,6 @@ const updateTaskEvent = (index) => {
       );
     });
 };
+
 
 export { createTaskEvent, sideMenuEvent, singleTaskEvent, updateTaskEvent };

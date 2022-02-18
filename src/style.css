@@ -33,7 +33,7 @@ body {
     max-width: var(--maxWidth);
     margin: 0 auto;
     display: flex;
-    height: 90vh;
+    /* height: 90vh; */
     color: var(--textColor);
 }
 
@@ -371,12 +371,10 @@ opacity: 1;
  #projectMenu {
    background: var(--lightGrey);
    width: 25%;
-   display: flex;
-   flex-direction: column;
    padding: 40px 30px;
  }
 
- #projectMenu p {
+ #immediateTasks li {
   padding: 15px;
   cursor: pointer;
   font-size: .9em;
@@ -384,63 +382,59 @@ opacity: 1;
   border-radius: 3px;
   display: flex;
   justify-content: space-between;
+  font-weight: 600;
  }
 
-#projectMenu p span {
+#projectMenu li span {
   padding:5px 8px;
   font-weight: 800;
   border-radius: 3px;
-  color: var(--white);
-  font-size: .8em;
-
+  font-size: 1em;
 }
 
-#projectMenu .todayMenu {
+#immediateTasks li:hover, #projectTabContainer li:hover {
   background: var(--grey);
-  font-weight: bolder;
-
+  transition: .8s;
 }
 
-#projectMenu .todayMenu span {
+#immediateTasks li span {
   background: var(--yellow);
   color: var(--darkBlue);
 }
 
-#projectMenu p:hover {
-  transition: .3s;
-  background: var(--veryLightGrey);
+#immediateTasks .urgentMenu {
+  margin-top: 25px;
+  font-weight: 700;
+  background: var(--grey);
+  color:rgb(233, 9, 1);
+  align-items: center;
 }
 
-#projectTabContainer {
+#immediateTasks .urgentMenu span {
+  background:rgb(233, 9, 1);
+  color: var(--white);
+}
+
+#immediateTasks .urgentMenu:hover {
+  background:var(--yellow);
+}
+
+#projectTabButton {
   margin-top: 50px;
+  background: var(--darkBlue);
+  color: var(--white);
+  font-weight: 600;
+  font-size: 1.5em;
 }
 
-#projectTabContainer h4 {
-  font-weight: 800;
-  font-size: 1.3em;
-  margin-bottom: 15px;
+#mobileProjectTitle {
+  display: none;
 }
 
-#projectTabContainer p span {
+#projectTabContainer li span {
   background: var(--darkBlue);
   color: var(--white);  
   text-align: center;
-}
-
-
-#projectMenu .tomorrowMenu span {
-  background: var(--teal);
-}
-
-#projectMenu .urgentMenu {
-  margin-top: 25px;
-  font-weight: 700;
-  background: var(--yellow);
-}
-
-#projectMenu .urgentMenu span {
-  background: var(--darkBlue);
-  color: var(--white);
 }
 
 /* Modify Task Form */
@@ -543,7 +537,7 @@ opacity: 1;
     margin: 5px 0 5px 10%;
     border-top: solid 1px var(--grey);
     border-bottom: solid 1px var(--grey);
-    padding: 5px 0;
+    padding: 5px 0
   }
   
   .deadline {
@@ -572,7 +566,81 @@ opacity: 1;
     width: 100%;
     padding: 20px;
   }
+
   #projectMenu {
-    display: none;
+    width: 100%;
+    border-top: solid 1px var(--darkBlue);
+    position: fixed;
+    bottom: 6.6%;
+    padding: 0; 
   }
+
+  #immediateTasks {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    position: fixed;
+    background: rgb(214, 214, 214);
+  }
+
+  #immediateTasks li {
+    width: 25%;
+    text-align: left;
+    padding: 15px 10px;
+    justify-content: center;
+    align-items: center;
+    font-size: .7em;
+    font-weight: 400;
+  }
+
+  #immediateTasks li span {
+    padding: 7px;
+  }
+
+  #immediateTasks .urgentMenu {
+    margin-top: 0;
+    text-align: center;
+  }
+
+  #projectTabContainer {
+    position: fixed;
+    bottom: -100vh;
+    background: var(--darkBlue);
+    height: 100vh;
+    width: 100%;
+    padding: 20% 10%;
+    z-index: -1;
+    transition: transform .8s ease-in-out;
+  }
+
+  .active {
+    transform: translate(0, -90vh);
+  }
+
+  #projectTabButton {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #projectTabButtonClose {
+    display: none;
+    background-color: var(--coral);
+  }
+
+  #mobileProjectTitle {
+    display: block;
+    color: var(--darkBlue);
+    font-weight: 600;
+    font-size: 1.5em;
+  }
+
+  #projectTabContainer li {
+    padding: 20px 15px;
+    border-radius: 5px;
+    justify-content: space-between;
+    margin: 5px 0;
+    background: var(--grey);
+  }
+
 }
